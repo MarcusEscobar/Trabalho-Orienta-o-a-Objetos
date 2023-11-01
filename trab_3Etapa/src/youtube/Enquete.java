@@ -16,4 +16,49 @@ public class Enquete extends Publicacao {
         qtdGostei =0;
         qtdNaoGostei =0;
     }
+
+    
+	public String[] getOpcoes() {
+		return opcoes;
+	}
+
+    public String getOpcao(int i){
+        return opcoes[i];
+    }
+
+	public void setOpcoes(String[] opcoes) {
+		this.opcoes = opcoes;
+	}
+
+    public void setOpcao(int i, String o){
+        opcoes[i] = o;
+    }
+
+	public int getQtdOpcoes() {
+		return qtdOpcoes;
+	}
+	public void setQtdOpcoes(int qtdOpcoes) {
+		this.qtdOpcoes = qtdOpcoes;
+	}
+	public int getQtdVotos() {
+		return qtdVotos;
+	}
+	public void setQtdVotos(int qtdVotos) {
+		this.qtdVotos = qtdVotos;
+	}
+	public int[] getQtdVotosEmCada() {
+		return qtdVotosEmCada;
+	}
+	public void setQtdVotosEmCada(int[] qtdVotosEmCada) {
+		this.qtdVotosEmCada = qtdVotosEmCada;
+	}
+	public String getPergunta() {
+		return pergunta;
+	}
+	public void setPergunta(String pergunta) {
+		this.pergunta = pergunta;
+	}
+
 }
+
+

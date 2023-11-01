@@ -8,6 +8,13 @@ public class Comentario extends Publicacao {
         autor = a;
         qtdGostei = 0;
         qtdNaoGostei = 0;
+    }
 
+    public String getTexto(){
+        return texto;
+    }
+
+    public void setTexto(String texto){
+        this.texto = texto;
     }
 }
