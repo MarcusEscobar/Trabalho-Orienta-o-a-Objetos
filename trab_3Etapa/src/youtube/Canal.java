@@ -15,6 +15,38 @@ public class Canal {
         qtdVideos = 0;
         totalVisualizacoes = 0;
     }
+
+    
+	public String getNomeCanal() {
+		return nomeCanal;
+	}
+	public void setNomeCanal(String nomeCanal) {
+		this.nomeCanal = nomeCanal;
+	}
+	public int getQtdInscritos() {
+		return qtdInscritos;
+	}
+	public void setQtdInscritos(int qtdInscritos) {
+		this.qtdInscritos = qtdInscritos;
+	}
+	public int getQtdVideos() {
+		return qtdVideos;
+	}
+	public void setQtdVideos(int qtdVideos) {
+		this.qtdVideos = qtdVideos;
+	}
+	public int getTotalVisualizacoes() {
+		return totalVisualizacoes;
+	}
+	public void setTotalVisualizacoes(int totalVisualizacoes) {
+		this.totalVisualizacoes = totalVisualizacoes;//Adicionar metododo viws++
+	}
+	public Usuario getProprietario() {
+		return proprietario;
+	}
+	public void setProprietario(Usuario proprietario) {
+		this.proprietario = proprietario;
+	}
 }
 
 
