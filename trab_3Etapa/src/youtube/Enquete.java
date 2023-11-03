@@ -3,8 +3,8 @@ package youtube;
 public class Enquete extends Publicacao {
     private String[] opcoes;
     private int qtdOpcoes;
-    private int qtdVotos;
-    private int[] qtdVotosEmCada;
+    private int qtdVotos; //Rever atributo
+    private int[] qtdVotosEmCada; //Rever atributo
     private String pergunta;
 
     public Enquete(String pergunta,String opcaoA, String opcaoB, String opcaoC, String opcaoD){//Sem autor, igual Video

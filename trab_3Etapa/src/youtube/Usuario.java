@@ -1,25 +1,29 @@
 package youtube;
 
 public class Usuario {
-    private String email;
+    //private String email; possivelmente não usaremos esse atributo
     private String senha;
     private String nomeUsuario;
     private Canal[] inscricoes = new Canal[100];
+    private int qtdInscrições = 0;
     private Video[] historico = new Video[100];
     
-    public Usuario(String email, String senha, String nomeUsuario){//Falta o atributo autor (rever Tipo)
-        this.email = email;
+    public Usuario( String senha, String nomeUsuario){
+        //this.email = email;
         this.senha = senha;
         this.nomeUsuario = nomeUsuario;
     
     }
 //Gets e Sets
+/*
     public String getEmail(){
         return email;
     }
     public void setEmail(String email){
         this.email = email;
     }
+ 
+*/
     public String getSenha(){
         return senha;
     }
@@ -36,6 +40,27 @@ public class Usuario {
     public Canal[] getInscricoes(){//Retorna o Array completo
         return inscricoes;
     }
+    public String inscricoesToString(){
+        String nomeCanais = new String("");
+        for(int i = 0; i < qtdInscrições; i++){
+         nomeCanais += new String(" "+inscricoes[i].getNomeCanal());
+        }
+ 
+        return nomeCanais;
+     }
+    public void CancelarInscrição(Canal canal){
+        int i = 0;
+        while(inscricoes[i] != canal){i++;}//Encontrei index do elemento que quero remover
+        for(; i<qtdInscrições-1; i++){
+            inscricoes[i] = inscricoes[i+1];
+        }
+        qtdInscrições--;
+    }
+    public void inscreverSe(Canal canal){
+        inscricoes[qtdInscrições] = canal;
+        qtdInscrições++;
+    }
+
     public Canal getInscricao(int i){//Retorna um elemento do Array com base no indice
         return inscricoes[i];
         /*
@@ -50,6 +75,14 @@ public class Usuario {
 
     public void setIncricao(int i, Canal c){//Subtitui somente um elemento do Array
         inscricoes[i] = c;
+    }
+
+    public int getQtdInscricoes(){
+        return qtdInscrições;
+    }
+    public void setQtdInscricoes(int qtdInscrições){
+        this.qtdInscrições = qtdInscrições;
+
     }
 
     public Video[] gethistorico(){
@@ -68,6 +101,7 @@ public class Usuario {
         historico[i] = v;
     }
 }
+
 /* Os métodos setIscricao e setVideoHistorico podem ser utilizados para inserção de novos elementos nos respectivos Arrays.
  * Só tomar cuidado com a capasidade máxima.
  * Também é possível criar novas funcões de inserção. Atravez da classe ArrayUtils é possivel usar o metodo .add, que recebe
