@@ -153,7 +153,8 @@ public abstract class Menu {
                     dados.getUsuario().inscreverSe(canal);
                     canal.setQtdInscritos(canal.getQtdInscritos()+1);
                     clear();
-                     menu4(dados, entrada, canal);
+                    menu4(dados, entrada, canal);
+
                 }
                 break;
             case 2:
@@ -187,7 +188,7 @@ public abstract class Menu {
             menu4(dados, entrada,canal);
         }else if(valor >= 1 && valor <= canal.getQtdVideos()){
             clear();
-            //Menu6
+            menu6(canal.getVideo(valor-1), dados, entrada);
 
         }else{
             System.out.println("Opção inválida");
@@ -247,11 +248,113 @@ public abstract class Menu {
 
     }
 
-    public static void menu6(Video video ){
+    public static void menu6(Video video, Dados dados, Scanner entrada){
+        if(video.getIsPausado()){
+            System.out.println("O video está pausado\n");
+        }else{
+            System.out.println("O video "+video.getTitulo()+" está passando\n");
+        }
+        switch (video.getVelocidade()) {
+            case 2:
+                System.out.println("Velocidade atual: 2x\n");
+                break;
+        
+            default:
+                System.out.println("Velocidade atual: 1x\n");
+                break;
+        }
+        System.out.println("Quantidade Gostei: "+video.getQtdGostei()+"\n");
+        System.out.println("Quantidade Não Gostei: "+video.getQtdNaoGostei()+"\n");
         String opcoes = new String("Escolha uma opção\n\n");
-        opcoes += "  0 - voltar canal";
-        opcoes += " 1 - voltar página principal";
+        opcoes += "  0 - voltar canal\n";
+        opcoes += "  1 - voltar página principal\n";
+        if(!video.getStatusGostei() && !video.getStatusNãoGostei()){
+            opcoes += "  2 - Gostei\n"; //GOSTEI = TRUE // NAO GOSTEI = FALSE
+            opcoes += "  3 - Não gostei\n";//GOSTEI = FALSE // NAO GOSTEI = TRUE
+        }else if(video.getStatusGostei() == true && video.getStatusNãoGostei() == false){
+            opcoes += "  3 - Não gostei\n";
+        }else{
+            opcoes += "  2 - Gostei\n";}
+        opcoes += "  4 - Ler comentários\n";
+        if(video.getIsPausado()){
+             opcoes += "  5 - Reproduzir\n";
+        }else{
+            opcoes += "  5 - pausar video\n";
+        }
+        switch (video.getVelocidade()){
+            case 2:
+                opcoes += "  6 - Reduzir velocidade\n";
+                break;
+        
+            default:
+                opcoes += "  6 - aumentar velocidade\n";
+                break;
+        }
         System.out.println(opcoes);
+        int valor = entrada.nextInt();
+        switch (valor) {
+            case 0:
+                clear();
+                menu4(dados, entrada, video.getAutor());
+                break;
+
+            case 1:
+                clear();
+                menu2(dados, entrada);
+                break;
+            case 2:
+            if(!video.getStatusGostei() && !video.getStatusNãoGostei()){
+                video.setStatusGostei(true);
+                video.setQtdGostei(video.getQtdGostei()+1);//adiciona 1 na quantidade de gostei
+                video.setStatusNãoGostei(false);
+                clear();
+                menu6(video, dados, entrada);
+                break;
+            }else if(video.getStatusNãoGostei() && !video.getStatusGostei()){
+                video.setStatusGostei(true);
+                video.setQtdGostei(video.getQtdGostei()+1);//adiciona 1 na quantidade de gostei
+                video.setStatusNãoGostei(false);
+                video.setQtdNaoGostei(video.getQtdNaoGostei()-1);
+                clear();
+                menu6(video, dados, entrada);
+                break;
+            }else{
+                clear();
+                System.out.println("Opção inválida");
+                menu6(video, dados, entrada);
+                break;
+            }
+            case 3:
+            if(!video.getStatusGostei() && !video.getStatusNãoGostei()){
+                video.setStatusNãoGostei(true);
+                video.setQtdNaoGostei(video.getQtdNaoGostei()+1);
+                video.setStatusGostei(false);
+                clear();
+                menu6(video, dados, entrada);
+                break;
+            }else if(video.getStatusGostei() && !video.getStatusNãoGostei()){
+                video.setStatusNãoGostei(true);
+                video.setQtdNaoGostei(video.getQtdNaoGostei()+1);//adiciona 1 na quantidade de gostei
+                video.setStatusGostei(false);
+                video.setQtdGostei(video.getQtdGostei()-1);
+                clear();
+                menu6(video, dados, entrada);
+                break;
+
+            }else{
+                clear();
+                System.out.println("Opção inválida");
+                menu6(video, dados, entrada);
+                break;
+            }
+        
+            default:
+                clear();
+                System.out.println("Opção inválida");
+                menu6(video, dados, entrada);
+                break;
+        }
+
         
     }
 }
@@ -262,9 +365,9 @@ public abstract class Menu {
         6.2 Like/deslike
         6.3 Fazer um comentario _Adiciona ao Array de comentarios_//_console de criação 9_
         6.4 Ler comentarios _PRINTA o toString dos comentários_ 
-        6.5 Acessar comentario _Chama  o console 7_
+            6.5 Acessar comentario _Chama  o console 7_
         6.6 pausar video/despausar
         6.7 aumentar velocidade
-        6.8 avancar/retroceder
+        
         6.9 editar video _Pede senha do canal para habilitar edição_//_Chama console 13_
 */

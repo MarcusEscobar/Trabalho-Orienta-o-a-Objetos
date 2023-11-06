@@ -6,6 +6,11 @@ public class Video extends Publicacao {
     private float duracaoVideo;//Segundos
     private int qtdVisualizacoes;
 	private Canal autor;
+	private boolean isPausado = false;
+	private int velocidade = 1;
+	
+
+
 
 	public Video(String titulo, String descricao, float duracaoVideo, Canal c, int views){
         this.titulo = titulo;
@@ -16,6 +21,8 @@ public class Video extends Publicacao {
         qtdVisualizacoes = views;
 		autor = c;
     }
+	
+	
 
     public String getTitulo() {
 		return titulo;
@@ -55,6 +62,21 @@ public class Video extends Publicacao {
 
 	public void setAutor(Canal autor) {
 		this.autor = autor;
+	}
+		public int getVelocidade() {
+		return velocidade;
+	}
+
+	public void setVelocidade(int velocidade) {
+		this.velocidade = velocidade;
+	}
+
+	public boolean getIsPausado() {
+		return isPausado;
+	}
+
+	public void setIsPausado(boolean isPausado) {
+		this.isPausado = isPausado;
 	}
 
     

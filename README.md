@@ -48,8 +48,8 @@ console 6:_console para Video_
         6.1 voltar Home page _Pode ser uma boa ideia poder voltar diretamente pra Home_
         6.2 Like/deslike
         6.3 Fazer um comentario _Adiciona ao Array de comentarios_//_console de criação 9_
-        6.4 Ler comentarios _PRINTA o toString dos comentários_ 
-        6.5 Acessar comentario _Chama  o console 7_
+        6.4 'ler' comentarios _PRINTA o toString dos comentários_ => Novo console
+                6.5 Acessar comentario _Chama  o console 7_
         6.6 pausar video/despausar
         6.7 aumentar velocidade
         6.8 avancar/retroceder
