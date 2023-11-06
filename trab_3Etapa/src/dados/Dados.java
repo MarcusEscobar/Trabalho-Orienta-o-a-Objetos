@@ -14,11 +14,11 @@ public class Dados {
         return user;
     }
 
-    public void setUsuario(Usuario user){
+    public void setUsuario(Usuario user){//Provavemente não será usado
         this.user = user;
     }
 
-    public Canal[] getCanais(){
+    public Canal[] getCanais(){//Provavemente não será usado
         return canais;
     }
     public Canal getCanal(int i){
@@ -47,22 +47,26 @@ public class Dados {
             if (nomeAleatorio.length() > 0 && !vogais.contains(Character.toString(nomeAleatorio.charAt(nomeAleatorio.length() - 1)))) {
                 letra = vogais.charAt(random.nextInt(vogais.length()));
             } else {letra = alfabeto.charAt(random.nextInt(alfabeto.length()));}
-            nomeAleatorio.append(letra);
+            nomeAleatorio.append(letra); 
         }
-        return nomeAleatorio.toString();
+        String nome = nomeAleatorio.toString();
+        nome = nome.substring(0,1).toUpperCase().concat(nome.substring(1));//Primeira letra Maiúscula
+        return nome;
     }
+    
     public void preencherVideos(Canal c, int qtdVideos){
         Video[] videos = new Video[qtdVideos];
         int v = 0;
 
         for(int i = 0; i<qtdVideos ;i++){
-            String s = String.valueOf(i);
+            String s = String.valueOf(i+1);
             int views = random.nextInt(1, 1000);
-            videos[i] = new Video("Video".concat(s), "Descrição".concat(s), random.nextFloat(10, 60), c, views);
+            videos[i] = new Video("Video ".concat(s), "Descrição ".concat(s), random.nextFloat(10, 60), c, views);
             v += views;
         }
         c.setVideos(videos);
         c.setTotalVisualizacoes(v);
+        c.setQtdVideos(qtdVideos);
 
     }
 
@@ -71,13 +75,14 @@ public class Dados {
 
         for(int i = 0; i < qtdEnquetes; i++){
             String s = String.valueOf(i);
-            enquetes[i] = new Enquete("Pergunta".concat(s), "Opção 1", "Opção 2", "Opção 3", "Opção 4");
+            enquetes[i] = new Enquete("Pergunta ".concat(s), "Opção 1", "Opção 2", "Opção 3", "Opção 4", c);
             //Para o atributo pergunta podemos criar templates e selecionar aletatoriamente
         }
         c.setEnqueteS(enquetes);
+        c.setQtdEnquetes(qtdEnquetes);
     }
 
-    public void preencherCanais(){//krl essa função ficou mt grande, mas basicamente cria Objetos aleatorios
+    public void preencherCanais(){
         for(int i = 0; i < 10; i++){
             String nomeRandom = gerarNomeAleatorio(random.nextInt(4, 8)); 
             canais[i] = new Canal(nomeRandom , new Usuario(nomeRandom.concat("Senha"), nomeRandom.concat("User")));

@@ -3,11 +3,8 @@ package youtube;
 public abstract class Publicacao {
     protected int qtdGostei;
     protected int qtdNaoGostei;
-    protected Usuario autor;
     /*
-     * rever O atributo 'Autor' da classe abstrata Publicação.
-     *  Atualmente está do tipo Usuario, o que só faz sentido na classe Comentario, 
-     * para as classes Video e Enquete o atributo autor deveria ser do tipo Canal.
+     * Não possui mais o atributo Autor
     */
 
     
@@ -22,12 +19,6 @@ public abstract class Publicacao {
 	}
 	public void setQtdNaoGostei(int qtdNaoGostei) {
 		this.qtdNaoGostei = qtdNaoGostei;
-	}
-	public Usuario getAutor() {
-		return autor;
-	}
-	public void setAutor(Usuario autor) {
-		this.autor = autor;
 	}
 
 }

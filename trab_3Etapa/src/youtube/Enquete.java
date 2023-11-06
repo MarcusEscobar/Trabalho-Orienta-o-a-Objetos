@@ -6,8 +6,9 @@ public class Enquete extends Publicacao {
     private int qtdVotos; //Rever atributo
     private int[] qtdVotosEmCada; //Rever atributo
     private String pergunta;
+	private Canal autor;
 
-    public Enquete(String pergunta,String opcaoA, String opcaoB, String opcaoC, String opcaoD){//Sem autor, igual Video
+	public Enquete(String pergunta,String opcaoA, String opcaoB, String opcaoC, String opcaoD, Canal autor){//Sem autor, igual Video
         this.pergunta = pergunta;
         opcoes = new String[]{opcaoA, opcaoB, opcaoC, opcaoD};//Somente 4 opçoes de escolha
         qtdOpcoes = 4;
@@ -15,6 +16,7 @@ public class Enquete extends Publicacao {
         qtdVotosEmCada = new int[]{0,0,0,0};//Cada opção starta com O votos
         qtdGostei =0;
         qtdNaoGostei =0;
+		this.autor = autor;
     }
 
     
@@ -58,6 +60,15 @@ public class Enquete extends Publicacao {
 	public void setPergunta(String pergunta) {
 		this.pergunta = pergunta;
 	}
+	public Canal getAutor() {
+		return autor;
+	}
+
+
+	public void setAutor(Canal autor) {
+		this.autor = autor;
+	}
+
 
 }
 

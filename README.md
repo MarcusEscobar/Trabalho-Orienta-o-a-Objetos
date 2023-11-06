@@ -17,8 +17,8 @@ console 1:_É um console de criação, não possui opções de escolha apenas en
 console 2: Olá {User.nome}, o que deseja? _"Home page"_ 
         2.0 - Sair _Fecha o app_ [FEITO]
         2.1 - Listar Canais _Printa uma lista de todos o canais no banco de dados_ // _Entra no console 3_ [FEITO]
-        2.2 - Listar inscriçoes _Chama console 3 variante inscriçoes_ [FEITO]
-        2.3 - Listar Historico
+        2.2 - Listar inscriçoes _Chama console 3, variante inscriçoes_ [FEITO]
+        2.3 - Listar Historico [FEITO]
         2.4 - Editar usuario _console de edição 11_//_Pede senha Usuário_ 
         2.5 - Criar um canal _console de criação 10_
     
@@ -30,17 +30,17 @@ console 2: Olá {User.nome}, o que deseja? _"Home page"_
         4.0 Voltar home page [FEITO]
         4.1 se inscrever/desinscrever _o usuário pode se inscrever em seu proprio canal?_[FEITO]
         4.2 listar Videos _Chama o console 5.1 passando o Array de videos_[FEITO]
-        4.3 Listar Enquetes _Chama o console 5.2_
+        4.3 Listar Enquetes _Chama o console 5.2_[FEITO]
         _Talvez uma opção de acessar um video direto pelo nome, nesse caso pularia o console 5_
         4.4 Editar Canal _Pede uma senha para habilitar edição_//_Chama console 12_
         _Para descobrir se o canal é do usuário perguntamos a senha do canal, olhe console 10_
 
-console 5.1: videos de {Canal.nome}
-        5.0 voltar ao canal _Retorna console 4_
+console 5.1: videos de {Canal.nome}[FEITO]
+        5.0 voltar ao canal _Retorna console 4_[FEITO]
         5.1 Acessar Video _Entra console 6 com Obj = Video acessado_
 
-console 5.2: Enquetes de {Canal.nome}
-        5.0 voltar ao canal _Retorna console 4_
+console 5.2: Enquetes de {Canal.nome}[FEITO]
+        5.0 voltar ao canal _Retorna console 4_[FEITO]
         5.1 Acessar Enquete _Entra console 8 com Obj = Enquete acessado_
 
 console 6:_console para Video_

@@ -7,6 +7,7 @@ public class Usuario {
     private Canal[] inscricoes = new Canal[100];
     private int qtdInscrições = 0;
     private Video[] historico = new Video[100];
+    private int qtdHistorico = 0;
     
     public Usuario( String senha, String nomeUsuario){
         //this.email = email;
@@ -99,6 +100,13 @@ public class Usuario {
 
     public void setVideoHistorico(int i, Video v){
         historico[i] = v;
+    }
+
+    public int getQtdHistorico() {
+        return qtdHistorico;
+    }
+    public void setQtdHistorico(int qtdHistorico) {
+        this.qtdHistorico = qtdHistorico;
     }
 }
 

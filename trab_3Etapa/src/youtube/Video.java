@@ -5,15 +5,16 @@ public class Video extends Publicacao {
     private String descricaoVideo;
     private float duracaoVideo;//Segundos
     private int qtdVisualizacoes;
+	private Canal autor;
 
-    public Video(String titulo, String descricao, float duracaoVideo, Canal c, int views){//Está faltando o atributo Autor, olhar Classe Publicação
+	public Video(String titulo, String descricao, float duracaoVideo, Canal c, int views){
         this.titulo = titulo;
         descricaoVideo = descricao;
         this.duracaoVideo = duracaoVideo;
         qtdGostei = 0;
         qtdNaoGostei = 0;
         qtdVisualizacoes = views;
-		autor = c.getProprietario();
+		autor = c;
     }
 
     public String getTitulo() {
@@ -47,6 +48,14 @@ public class Video extends Publicacao {
 	public void setQtdVisualizacoes(int qtdVisualizacoes) {
 		this.qtdVisualizacoes = qtdVisualizacoes;
 	}
-    
+
+	public Canal getAutor() {
+		return autor;
+	}
+
+	public void setAutor(Canal autor) {
+		this.autor = autor;
+	}
+
     
 }

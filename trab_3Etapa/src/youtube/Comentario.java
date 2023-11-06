@@ -2,6 +2,7 @@ package youtube;
 
 public class Comentario extends Publicacao {
     private String texto;
+    private Usuario autor;
 
     public Comentario(String texto, Usuario a){
         this.texto = texto;
@@ -16,5 +17,13 @@ public class Comentario extends Publicacao {
 
     public void setTexto(String texto){
         this.texto = texto;
+    }
+
+    public Usuario getAutor() {
+        return autor;
+    }
+
+    public void setAutor(Usuario autor) {
+        this.autor = autor;
     }
 }
