@@ -44,15 +44,15 @@ console 5.2: Enquetes de {Canal.nome}[FEITO]
         5.1 Acessar Enquete _Entra console 8 com Obj = Enquete acessado_
 
 console 6:_console para Video_
-        6.0 voltar ao canal _Retorna console 4_
-        6.1 voltar Home page _Pode ser uma boa ideia poder voltar diretamente pra Home_
-        6.2 Like/deslike
+        6.0 voltar ao canal _Retorna console 4_[FEITO]
+        6.1 voltar Home page _Pode ser uma boa ideia poder voltar diretamente pra Home_[FEITO]
+        6.2 Like/deslike[FEITO]
         6.3 Fazer um comentario _Adiciona ao Array de comentarios_//_console de criação 9_
-        6.4 'ler' comentarios _PRINTA o toString dos comentários_ => Novo console
+        6.4 'ler' comentarios _PRINTA o toString dos comentários_ => Novo console[FEITO]
                 6.5 Acessar comentario _Chama  o console 7_
-        6.6 pausar video/despausar
-        6.7 aumentar velocidade
-        6.8 avancar/retroceder
+        6.6 pausar video/despausar[FEITO]
+        6.7 aumentar velocidade[FEITO]
+        6.8 avancar/retroceder[FEITO]
         6.9 editar video _Pede senha do canal para habilitar edição_//_Chama console 13_
 
 console 7:_console para comentários_

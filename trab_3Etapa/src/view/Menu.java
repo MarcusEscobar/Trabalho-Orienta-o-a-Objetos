@@ -241,8 +241,8 @@ public abstract class Menu {
             //Menu8
 
         }else{
-            System.out.println("Opção inválida");
             clear();
+            System.out.println("Opção inválida");
             menu5_Enquete(canal, dados, entrada);
         }
 
@@ -348,26 +348,59 @@ public abstract class Menu {
                 break;
             }
         
+            case 4:
+                clear();
+                lerComentarios(dados, entrada, video);
+                break;
+            case 5:
+                if(video.getIsPausado()){
+                    video.setIsPausado(false);
+                    clear();
+                    menu6(video, dados, entrada);
+                }else{
+                    video.setIsPausado(true);
+                    clear();
+                    menu6(video, dados, entrada);}
+                break;
+            case 6:
+                if(video.getVelocidade() == 1){
+                    video.setVelocidade(2);
+                    clear();
+                    menu6(video, dados, entrada);
+                }else{
+                    video.setVelocidade(1);
+                    clear();
+                    menu6(video, dados, entrada);}
+                break;
             default:
                 clear();
                 System.out.println("Opção inválida");
                 menu6(video, dados, entrada);
                 break;
         }
+    }
+    
+    public static void lerComentarios(Dados dados, Scanner entrada, Video video){
+        String opcao = new String("Escolha uma opção\n\n");
+        opcao += "  0 - Retornar ao video\n\n";
+        opcao +="Comentários de "+video.getTitulo()+" do canal "+video.getAutor().getNomeCanal()+"\n";
+        for(int i = 1; i <= video.getQtdComentarios();i++){
+            String s = String.valueOf(i);
+            opcao += new String("  "+s+" - "+video.getComentario(i-1).comentarioToString()+"\n");
+        }
+        System.out.println(opcao);
+        int valor = entrada.nextInt();
+        if(valor == 0){
+            clear();
+            menu6(video, dados, entrada);
+        }else if(valor >=1 && valor <=video.getQtdComentarios()){
+            clear();
+            //menu7
+        }else{
+            clear();
+            System.out.println("Opção inválida");
+            lerComentarios(dados, entrada, video);
+        }
 
-        
     }
 }
-/*
- * console 6:_console para Video_
-        6.0 voltar ao canal _Retorna console 4_
-        6.1 voltar Home page _Pode ser uma boa ideia poder voltar diretamente pra Home_
-        6.2 Like/deslike
-        6.3 Fazer um comentario _Adiciona ao Array de comentarios_//_console de criação 9_
-        6.4 Ler comentarios _PRINTA o toString dos comentários_ 
-            6.5 Acessar comentario _Chama  o console 7_
-        6.6 pausar video/despausar
-        6.7 aumentar velocidade
-        
-        6.9 editar video _Pede senha do canal para habilitar edição_//_Chama console 13_
-*/

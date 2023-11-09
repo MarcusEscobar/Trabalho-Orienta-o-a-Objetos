@@ -5,10 +5,18 @@ public abstract class Publicacao {
     protected int qtdNaoGostei;
 	protected boolean statusGostei = false;
 	protected boolean statusNãoGostei = false;
+	protected Comentario[] comentarios = new Comentario[50];
+	protected int qtdComentarios;
     /*
      * Não possui mais o atributo Autor
     */
 
+	public int getQtdComentarios() {
+		return qtdComentarios;
+	}
+	public void setQtdComentarios(int qtdComentarios) {
+		this.qtdComentarios = qtdComentarios;
+	}
 	public boolean getStatusGostei() {
 		return statusGostei;
 	}
@@ -32,6 +40,19 @@ public abstract class Publicacao {
 	}
 	public void setQtdNaoGostei(int NaoGostei) {
 		qtdNaoGostei = NaoGostei;
+	}
+	public Comentario[] getComentarios() {
+		return comentarios;
+	}
+	public void setComentarios(Comentario[] comentarios) {
+		this.comentarios = comentarios;
+	}
+	public Comentario getComentario(int i){
+		return comentarios[i];
+
+	}
+	public void setComentario(int i, Comentario c){
+		comentarios[i]=c;
 	}
 
 }

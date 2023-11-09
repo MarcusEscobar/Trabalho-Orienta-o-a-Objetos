@@ -53,6 +53,15 @@ public class Dados {
         nome = nome.substring(0,1).toUpperCase().concat(nome.substring(1));//Primeira letra Maiúscula
         return nome;
     }
+    public void preencherComentarios(Video v, int qtdComentarios){
+        Comentario[] comentarios = new Comentario[qtdComentarios];
+        for(int i = 0; i<qtdComentarios; i++){
+            String s = String.valueOf(i+1);
+            comentarios[i]= new Comentario("Comentario ".concat(s), new Usuario("user ".concat(s),"user ".concat(s)));}
+        v.setComentarios(comentarios);
+        v.setQtdComentarios(qtdComentarios);
+
+    }
     
     public void preencherVideos(Canal c, int qtdVideos){
         Video[] videos = new Video[qtdVideos];
@@ -62,6 +71,9 @@ public class Dados {
             String s = String.valueOf(i+1);
             int views = random.nextInt(1, 1000);
             videos[i] = new Video("Video ".concat(s), "Descrição ".concat(s), random.nextFloat(10, 60), c, views);
+            videos[i].setQtdGostei(random.nextInt(0, 1000));
+            videos[i].setQtdNaoGostei(random.nextInt(0, 500));
+            preencherComentarios(videos[i],random.nextInt(1, 10) );
             v += views;
         }
         c.setVideos(videos);

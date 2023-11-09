@@ -26,4 +26,7 @@ public class Comentario extends Publicacao {
     public void setAutor(Usuario autor) {
         this.autor = autor;
     }
+    public String comentarioToString(){
+        return autor.getNomeUsuario()+": "+texto;
+    }
 }

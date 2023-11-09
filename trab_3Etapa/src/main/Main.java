@@ -1,7 +1,6 @@
 package main;
 
 import java.util.*;
-
 import dados.Dados;
 import view.*;
 
