@@ -55,4 +55,29 @@ public abstract class Publicacao {
 		comentarios[i]=c;
 	}
 
+	public void adicionarGostei(){
+		if(!statusGostei && !statusNãoGostei){
+			statusGostei = true;
+			statusNãoGostei = false;
+			qtdGostei++;
+		}else if(statusNãoGostei && !statusGostei){
+			statusGostei = true;
+			statusNãoGostei = false;
+			qtdGostei++;
+			qtdNaoGostei--;
+		}
+	}
+	public void adicionarNaoGostei(){
+		if(!statusGostei && !statusNãoGostei){
+			statusGostei = false;
+			statusNãoGostei = true;
+			qtdNaoGostei++;
+		}else if(!statusNãoGostei && statusGostei){
+			statusGostei = false;
+			statusNãoGostei = true;
+			qtdGostei--;
+			qtdNaoGostei++;
+		}
+	}
+
 }

@@ -303,51 +303,15 @@ public abstract class Menu {
                 menu2(dados, entrada);
                 break;
             case 2:
-            if(!video.getStatusGostei() && !video.getStatusNãoGostei()){
-                video.setStatusGostei(true);
-                video.setQtdGostei(video.getQtdGostei()+1);//adiciona 1 na quantidade de gostei
-                video.setStatusNãoGostei(false);
+                video.adicionarGostei();
                 clear();
                 menu6(video, dados, entrada);
                 break;
-            }else if(video.getStatusNãoGostei() && !video.getStatusGostei()){
-                video.setStatusGostei(true);
-                video.setQtdGostei(video.getQtdGostei()+1);//adiciona 1 na quantidade de gostei
-                video.setStatusNãoGostei(false);
-                video.setQtdNaoGostei(video.getQtdNaoGostei()-1);
-                clear();
-                menu6(video, dados, entrada);
-                break;
-            }else{
-                clear();
-                System.out.println("Opção inválida");
-                menu6(video, dados, entrada);
-                break;
-            }
             case 3:
-            if(!video.getStatusGostei() && !video.getStatusNãoGostei()){
-                video.setStatusNãoGostei(true);
-                video.setQtdNaoGostei(video.getQtdNaoGostei()+1);
-                video.setStatusGostei(false);
+                video.adicionarNaoGostei();
                 clear();
                 menu6(video, dados, entrada);
                 break;
-            }else if(video.getStatusGostei() && !video.getStatusNãoGostei()){
-                video.setStatusNãoGostei(true);
-                video.setQtdNaoGostei(video.getQtdNaoGostei()+1);//adiciona 1 na quantidade de gostei
-                video.setStatusGostei(false);
-                video.setQtdGostei(video.getQtdGostei()-1);
-                clear();
-                menu6(video, dados, entrada);
-                break;
-
-            }else{
-                clear();
-                System.out.println("Opção inválida");
-                menu6(video, dados, entrada);
-                break;
-            }
-        
             case 4:
                 clear();
                 lerComentarios(dados, entrada, video);
