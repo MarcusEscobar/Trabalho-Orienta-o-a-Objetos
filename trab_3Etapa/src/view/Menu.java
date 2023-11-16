@@ -132,9 +132,10 @@ public abstract class Menu {
         }else{
             opçoes += "  1 - Inscrever-se\n";
         }
-        opçoes += "  2 - Listar videos\n";
-        opçoes += "  3 - Listar enquetes\n";
+        opçoes += "  2 - Menu de vídeos\n";
+        opçoes += "  3 - Menu enquetes\n";
         opçoes += "  4 - Editar canal\n";
+        opçoes += "  5 - Excluir canal canal\n";
         System.out.println(opçoes);
         int valor = entrada.nextInt();
         switch (valor) {
@@ -159,7 +160,8 @@ public abstract class Menu {
                 break;
             case 2:
                 clear();
-                menu5_Videos(canal, dados, entrada);
+               //menu5_Videos(canal, dados, entrada);
+                menuDeVideos(canal, dados, entrada);
                 break;
             case 3:
                 clear();
@@ -174,7 +176,43 @@ public abstract class Menu {
             
     }
 
+    public static void menuDeVideos(Canal canal, Dados dados, Scanner entrada){
+        String opçoes = new String("Escolha um opção\n\n");
+        opçoes += "0 - voltar ao canal\n";//menu4
+        opçoes += "1 - Criar video\n";
+        opçoes += "2 - listar todos os vídeos\n";//Menu5video
+        opçoes += "3 - Buscar video pelo título\n";
+        System.out.println(opçoes);
+        int valor = entrada.nextInt();
+        switch (valor) {
+            case 0:
+                clear();
+                menu4(dados, entrada,canal);
+                break;
+            case 1:
+                //Create video
+                break;
+            case 2:
+                menu5_Videos(canal, dados, entrada);
+                break;
+            case 3:
+                //Buscar por titulo
+                clear();
+                break;
+            default:
+                clear();
+                System.out.println("opção inválida");
+                menuDeVideos(canal, dados, entrada);
+                break;
+        }
+
+    }
+
+
+    
+
     public static void menu5_Videos(Canal canal, Dados dados, Scanner entrada){//Printa Videos Canal
+        //Criar toString video
         String opçoes = new String("Escolha um opção\n\n");
         opçoes +="  0 - voltar ao canal\n\n";
         opçoes+="Videos de "+canal.getNomeCanal()+"\n\n";       
@@ -191,8 +229,8 @@ public abstract class Menu {
             menu6(canal.getVideo(valor-1), dados, entrada);
 
         }else{
-            System.out.println("Opção inválida");
             clear();
+            System.out.println("Opção inválida");
             menu5_Videos(canal, dados, entrada);
         }
     }

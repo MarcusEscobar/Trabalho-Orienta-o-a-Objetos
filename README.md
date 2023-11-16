@@ -29,6 +29,7 @@ console 2: Olá {User.nome}, o que deseja? _"Home page"_
  console 3: Canais Disponiveis [FEITO]
         3.0 Voltar _Retorna ao console 2_[FEITO]
         3.1 Acessar Canal _Entra em um Canal_ // _console 4_[FEITO]
+                
 
  console 4:Este é o canal {Canal.nome} _Dentro de um Canal_
         4.0 Voltar home page [FEITO]
