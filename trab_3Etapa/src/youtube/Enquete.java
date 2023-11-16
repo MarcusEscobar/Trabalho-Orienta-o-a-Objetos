@@ -1,5 +1,7 @@
 package youtube;
 
+import java.util.Iterator;
+
 public class Enquete extends Publicacao {
     private String[] opcoes;
     private int qtdOpcoes;
@@ -8,12 +10,12 @@ public class Enquete extends Publicacao {
     private String pergunta;
 	private Canal autor;
 
-	public Enquete(String pergunta,String opcaoA, String opcaoB, String opcaoC, String opcaoD, Canal autor){//Sem autor, igual Video
+	public Enquete(String pergunta,int qtdOpcoes,int[]qtdVotosEmCada,String[] opcoes, Canal autor){//Sem autor, igual Video
         this.pergunta = pergunta;
-        opcoes = new String[]{opcaoA, opcaoB, opcaoC, opcaoD};//Somente 4 opçoes de escolha
-        qtdOpcoes = 4;
+        opcoes = new String[10];//O número de opções é aletorio, gerando um número entre 2 até 10
+        this.qtdOpcoes = qtdOpcoes;
         qtdVotos = 0;
-        qtdVotosEmCada = new int[]{0,0,0,0};//Cada opção starta com O votos
+        this.qtdVotosEmCada = qtdVotosEmCada;
         qtdGostei =0;
         qtdNaoGostei =0;
 		this.autor = autor;
@@ -69,7 +71,25 @@ public class Enquete extends Publicacao {
 		this.autor = autor;
 	}
 
+	public String enqueteToString() {
+		
+		String enqueteToText = new String("O canal " +autor+ "faz a seguinte pergunta: /n");
+		enqueteToText += pergunta + "/n";
+		String opcoesTextString = "";
+		for (int i = 0; i < qtdOpcoes ; i++) {
+			opcoesTextString += opcoes[i] + " - Quantidade de votos: " + qtdVotosEmCada[i] + "/n";
+		}
+		enqueteToText += opcoesTextString;
+		
+		return enqueteToText;
+		
 
+	}
+	
+	public void votar(int selecao) {
+		qtdVotosEmCada[selecao] += 1;
+	}
+	
 }
 
 

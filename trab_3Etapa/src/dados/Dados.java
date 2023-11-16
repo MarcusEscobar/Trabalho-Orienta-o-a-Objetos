@@ -86,10 +86,18 @@ public class Dados {
         Enquete[] enquetes = new Enquete[50];
 
         for(int i = 0; i < qtdEnquetes; i++){
-            String s = String.valueOf(i);
-            enquetes[i] = new Enquete("Pergunta ".concat(s), "Opção 1", "Opção 2", "Opção 3", "Opção 4", c);
-            //Para o atributo pergunta podemos criar templates e selecionar aletatoriamente
-        }
+        	int numOpcoes = random.nextInt(2,10);
+        	int[] votosEmCada = new int[numOpcoes];
+        	String[] opcoes = new String[numOpcoes];
+        	String pergunta = "Pergunta "+ String.valueOf(i +1);
+        	
+        	for(int j = 0; j < numOpcoes; j++) {
+        		votosEmCada[j] = 0;
+        		opcoes[j] = "Opções " + String.valueOf(j+1);
+        		
+        	}
+        	enquetes[i] = new Enquete(pergunta, numOpcoes,votosEmCada , opcoes, c);
+                   }
         c.setEnqueteS(enquetes);
         c.setQtdEnquetes(qtdEnquetes);
     }
