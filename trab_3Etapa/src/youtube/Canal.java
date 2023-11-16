@@ -90,7 +90,19 @@ public class Canal {
 		this.qtdEnquetes += i;
 	}
 
-
+	public boolean adicionarEnquete(Enquete novaEnquete) {
+		if (qtdEnquetes >= 50 ) {
+			return false;
+		}
+		else{
+			enquetes[qtdEnquetes] = novaEnquete;
+			qtdEnquetes++;
+			return true;
+		}
+		
+        
+        
+	}
 }
 
 

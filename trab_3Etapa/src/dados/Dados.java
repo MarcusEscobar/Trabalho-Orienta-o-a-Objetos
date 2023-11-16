@@ -83,7 +83,7 @@ public class Dados {
     }
 
     public void preencherEnquetes(Canal c, int qtdEnquetes){
-        Enquete[] enquetes = new Enquete[qtdEnquetes];
+        Enquete[] enquetes = new Enquete[50];
 
         for(int i = 0; i < qtdEnquetes; i++){
             String s = String.valueOf(i);
