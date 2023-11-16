@@ -11,7 +11,7 @@ public class Main {
     public static void main(String[] args){
         Scanner entrada = new Scanner(System.in);
         dados.preencherCanais();
-        Menu.menu1(dados, entrada);
+        Menu.loginUsuario(dados, entrada);
         
 }
 

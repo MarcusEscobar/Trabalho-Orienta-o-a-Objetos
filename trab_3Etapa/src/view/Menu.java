@@ -13,7 +13,7 @@ public abstract class Menu {
         System.out.println("\033c");
     }
 
-    public static void menu1(Dados dados, Scanner entrada){
+    public static void loginUsuario(Dados dados, Scanner entrada){
         clear();
         System.out.println("Bem-Vindo ao Youtube. Faça seu cadastro\n");
         System.out.println("Insira um nome");
@@ -25,10 +25,10 @@ public abstract class Menu {
         Usuario user = new Usuario(senha, nome);
         dados.setUsuario(user);
         clear();
-        menu2(dados, entrada);
+        homePage(dados, entrada);
     }
 
-    public static void menu2(Dados dados, Scanner entrada){
+    public static void homePage(Dados dados, Scanner entrada){
         System.out.println("Olá "+dados.getUsuario().getNomeUsuario()+", o que deseja?\n");
         String opçoes = new String("Escolha uma opção:\n\n");
         opçoes += "  0 - sair\n";
@@ -47,28 +47,28 @@ public abstract class Menu {
                 break;
             case 1:
                 clear();
-                menu3_Canais(dados, entrada);
+                listaCanais(dados, entrada);
                 break;
             case 2:
                 clear();
-                menu3_Inscricoes(dados, entrada);
+                listaInscricoes(dados, entrada);
                 break;
 
             case 3:
                 clear();
                 dados.getUsuario().setVideoHistorico(0, dados.getCanal(0).getVideo(0));
                 dados.getUsuario().setQtdHistorico(1);
-                menu5_Historico(dados.getUsuario(), dados, entrada);
+                listaHistorico(dados.getUsuario(), dados, entrada);
                 break;   
             default:
                 clear();
                 System.out.println("Opção inválida\n");
-                menu2(dados, entrada);//Recursividade, simulando loop de repetição
+                homePage(dados, entrada);//Recursividade, simulando loop de repetição
                 break;
         }
     }
 
-    public static void menu3_Canais(Dados dados, Scanner entrada){
+    public static void listaCanais(Dados dados, Scanner entrada){
         String opçoes = new String("Escolha uma opção:\n\n");
         opçoes += "  0 - voltar\n\n";
             opçoes +="Canais disponíveis:\n\n";
@@ -80,19 +80,19 @@ public abstract class Menu {
         int valor = entrada.nextInt();
         if(valor == 0){
             clear();
-            menu2(dados, entrada);
+            homePage(dados, entrada);
         }else if(valor >= 1 && valor <= dados.getQtdCanais()){
             clear();
-            menu4(dados, entrada, dados.getCanal(valor-1));
+            menuCanal(dados, entrada, dados.getCanal(valor-1));
 
         }else{
             System.out.println("Opção inválida");
             clear();
-            menu3_Canais(dados, entrada);
+            listaCanais(dados, entrada);
         }
     }
     
-    public static void menu3_Inscricoes(Dados dados, Scanner entrada){
+    public static void listaInscricoes(Dados dados, Scanner entrada){
         String opçoes = new String("Escolha uma opção:\n\n");
         opçoes += "  0 - voltar\n\n";
         if(dados.getUsuario().getQtdInscricoes() == 0){
@@ -108,21 +108,21 @@ public abstract class Menu {
         int valor = entrada.nextInt();
         if(valor == 0){
             clear();
-            menu2(dados, entrada);
+            homePage(dados, entrada);
         }else if(valor >= 1 && valor <= dados.getUsuario().getQtdInscricoes() && dados.getUsuario().getQtdInscricoes() != 0){
             clear();
-            menu4(dados, entrada, dados.getUsuario().getInscricao(valor-1));
+            menuCanal(dados, entrada, dados.getUsuario().getInscricao(valor-1));
 
         }else{
             System.out.println("Opção inválida");
             clear();
-            menu3_Inscricoes(dados, entrada);
+            listaInscricoes(dados, entrada);
         }
 
 
     }
 
-    public static void menu4(Dados dados, Scanner entrada, Canal canal){
+    public static void menuCanal(Dados dados, Scanner entrada, Canal canal){
         System.out.println("Este é o canal: "+canal.getNomeCanal());
         String opçoes = new String("Escolha uma opção:\n\n");
         opçoes += "  0 - voltar para pagina principal\n";
@@ -141,7 +141,7 @@ public abstract class Menu {
         switch (valor) {
             case 0:
                 clear();
-                menu2(dados, entrada);
+                homePage(dados, entrada);
                 break;
             case 1:
                 if(dados.getUsuario().inscricoesToString().contains(canal.getNomeCanal())){
@@ -149,12 +149,12 @@ public abstract class Menu {
                     dados.getUsuario().CancelarInscrição(canal);
                     canal.setQtdInscritos(canal.getQtdInscritos()-1);
                     clear();
-                     menu4(dados, entrada, canal);
+                     menuCanal(dados, entrada, canal);
                 }else{
                     dados.getUsuario().inscreverSe(canal);
                     canal.setQtdInscritos(canal.getQtdInscritos()+1);
                     clear();
-                    menu4(dados, entrada, canal);
+                    menuCanal(dados, entrada, canal);
 
                 }
                 break;
@@ -165,12 +165,12 @@ public abstract class Menu {
                 break;
             case 3:
                 clear();
-                menudeEnquetes(canal,dados,entrada);
+                menuDeEnquetes(canal,dados,entrada);
                 break;
             default:
                 clear();
                 System.out.println("opção inválida");
-                menu4(dados, entrada, canal);
+                menuCanal(dados, entrada, canal);
                 break;
         }
             
@@ -178,7 +178,7 @@ public abstract class Menu {
 
     public static void menuDeVideos(Canal canal, Dados dados, Scanner entrada){
         String opçoes = new String("Escolha um opção\n\n");
-        opçoes += "0 - voltar ao canal\n";//menu4
+        opçoes += "0 - voltar ao canal\n";//menuCanal
         opçoes += "1 - Criar video\n";
         opçoes += "2 - listar todos os vídeos\n";//Menu5video
         opçoes += "3 - Buscar video pelo título\n";
@@ -187,7 +187,7 @@ public abstract class Menu {
         switch (valor) {
             case 0:
                 clear();
-                menu4(dados, entrada,canal);
+                menuCanal(dados, entrada,canal);
                 break;
             case 1:
                 clear();
@@ -209,7 +209,6 @@ public abstract class Menu {
         }
 
     }
-
 
     public static void buscarPeloTitulo(Dados dados, Canal canal, Scanner entrada){ 
         System.out.println("buscando\n");
@@ -242,7 +241,7 @@ public abstract class Menu {
         int valor = entrada.nextInt();
         if(valor == 0){
             clear();
-            menu4(dados, entrada,canal);
+            menuCanal(dados, entrada,canal);
         }else if(valor >= 1 && valor <= canal.getQtdVideos()){
             clear();
             canal.getVideo(valor-1).addViws();
@@ -276,7 +275,7 @@ public abstract class Menu {
 
     }
 
-    public static void menu5_Historico(Usuario user, Dados dados, Scanner entrada){//Printa Histórico
+    public static void listaHistorico(Usuario user, Dados dados, Scanner entrada){//Printa Histórico
         String opçoes = new String("Escolha um opção\n\n");
         opçoes +="  0 - voltar para pagina principal\n\n";
         opçoes+="Histórico de "+user.getNomeUsuario()+":\n\n";
@@ -292,45 +291,47 @@ public abstract class Menu {
         int valor = entrada.nextInt();
         if(valor == 0){
             clear();
-            menu2(dados, entrada);
+            homePage(dados, entrada);
         }else if(valor >= 1 && valor <= user.getQtdHistorico() && user.getQtdHistorico()!=0){
             clear();
             //Menu 6
         }else{
             System.out.println("Opção inválida");
             clear();
-            menu5_Historico(user, dados, entrada);
+            listaHistorico(user, dados, entrada);
         }
     }
     
-    public static void menudeEnquetes(Canal canal, Dados dados, Scanner entrada){
+    public static void menuDeEnquetes(Canal canal, Dados dados, Scanner entrada){
         String opçoes = new String("Escolha um opção\n\n");
-        opçoes += "0 - voltar ao canal\n";//menu4
+        opçoes += "0 - voltar ao canal\n";//menuCanal
         opçoes += "1 - Criar Enquete\n";
-        opçoes += "2 - listar todas as Enquetes\n";//MenuListarEnquetes
+        opçoes += "2 - listar todas as Enquetes\n";//MenulistarEnquetes
         System.out.println(opçoes);
         int valor = entrada.nextInt();
         switch (valor) {
             case 0:
                 clear();
-                menu4(dados, entrada,canal);//voltar
+                menuCanal(dados, entrada,canal);//voltar
                 break;
             case 1:
-                Menu17CriarEnquete(canal,dados,entrada);//criar
+                clear();
+                criarEnquete(canal,dados,entrada);//criar
                 break;
             case 2:
-                ListarEnquetes(canal,dados,entrada);//listar
+                clear();
+                listarEnquetes(canal,dados,entrada);//listar
                 break;
                 
             default:
                 clear();
                 System.out.println("opção inválida");
-                menuDeVideos(canal, dados, entrada);
+                menuDeEnquetes(canal, dados, entrada);
                 break;
         }   	
     }          
                 
-     public static void Menu17CriarEnquete(Canal canal, Dados dados, Scanner entrada) {
+     public static void criarEnquete(Canal canal, Dados dados, Scanner entrada) {
     	 entrada.nextLine(); // limpando o buffer de entrada
     	 System.out.println("Qual é a sua pergunta?\n");
          String pergunta = entrada.nextLine();
@@ -345,20 +346,15 @@ public abstract class Menu {
          Enquete createdEnquete = new Enquete(pergunta,opçaoA ,opçaoB,opçaoC,opçaoD, canal);
         if( canal.adicionarEnquete(createdEnquete)) {
         	System.out.println("Enquete Criado com Sucesso");
-        	menudeEnquetes(canal, dados, entrada);
+        	menuDeEnquetes(canal, dados, entrada);
         }
          else {
 			System.out.println("Não foi Possivel criar a Enquete");
-			menudeEnquetes(canal, dados, entrada);
+			menuDeEnquetes(canal, dados, entrada);
 		}
      }
          
-         
-    	
-          
-    
-    
-    public static void ListarEnquetes(Canal canal, Dados dados, Scanner entrada){
+    public static void listarEnquetes(Canal canal, Dados dados, Scanner entrada){
         String opçoes = new String("Escolha um opção\n\n");
         opçoes +="  0 - voltar ao canal\n\n";
         opçoes+="Enquetes de "+canal.getNomeCanal()+"\n\n";       
@@ -369,7 +365,7 @@ public abstract class Menu {
         int valor = entrada.nextInt();
         if(valor == 0){
             clear();
-            menu4(dados, entrada,canal);
+            menuCanal(dados, entrada,canal);
         }else if(valor >= 1 && valor <= canal.getQtdEnquetes()){
             clear();
             //Menu8Acessar/ler enquente
@@ -377,7 +373,7 @@ public abstract class Menu {
         }else{
             clear();
             System.out.println("Opção inválida");
-            ListarEnquetes(canal, dados, entrada);
+            listarEnquetes(canal, dados, entrada);
         }
 
     }
@@ -414,12 +410,12 @@ public abstract class Menu {
         switch (valor) {
             case 0:
                 clear();
-                menu4(dados, entrada, video.getAutor());
+                menuCanal(dados, entrada, video.getAutor());
                 break;
 
             case 1:
                 clear();
-                menu2(dados, entrada);
+                homePage(dados, entrada);
                 break;
             case 2:
                 video.adicionarGostei();
