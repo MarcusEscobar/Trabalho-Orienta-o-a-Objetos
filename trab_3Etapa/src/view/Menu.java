@@ -190,14 +190,16 @@ public abstract class Menu {
                 menu4(dados, entrada,canal);
                 break;
             case 1:
-                //Create video
+                clear();
+                criarVideo(dados, entrada, canal);
                 break;
             case 2:
-                menu5_Videos(canal, dados, entrada);
+                clear();
+                listarVideos(canal, dados, entrada);
                 break;
             case 3:
-                //Buscar por titulo
                 clear();
+                buscarPeloTitulo(dados, canal, entrada);
                 break;
             default:
                 clear();
@@ -209,9 +211,26 @@ public abstract class Menu {
     }
 
 
-    
+    public static void buscarPeloTitulo(Dados dados, Canal canal, Scanner entrada){ 
+        System.out.println("buscando\n");
+        System.out.println("digite o titulo de um vídeo");
+        entrada.nextLine();//Limpando Buffer de entrada
+        String titulo = entrada.nextLine();
+        Video video = canal.buscarVideo(titulo);
+         if(video==null){
+             clear();
+             System.out.println("Video não encontrado");
+             menuDeVideos(canal, dados, entrada);
+         }else{
+             clear();
+             video.addViws();
+             menu6(video, dados, entrada);
+         }
 
-    public static void menu5_Videos(Canal canal, Dados dados, Scanner entrada){//Printa Videos Canal
+         
+    }
+
+    public static void listarVideos(Canal canal, Dados dados, Scanner entrada){//Printa Videos Canal
         //Criar toString video
         String opçoes = new String("Escolha um opção\n\n");
         opçoes +="  0 - voltar ao canal\n\n";
@@ -226,15 +245,37 @@ public abstract class Menu {
             menu4(dados, entrada,canal);
         }else if(valor >= 1 && valor <= canal.getQtdVideos()){
             clear();
+            canal.getVideo(valor-1).addViws();
             menu6(canal.getVideo(valor-1), dados, entrada);
 
         }else{
             clear();
             System.out.println("Opção inválida");
-            menu5_Videos(canal, dados, entrada);
+            listarVideos(canal, dados, entrada);
         }
     }
-    
+   
+    public static void criarVideo(Dados dados,Scanner entrada, Canal canal){
+        entrada.nextLine();
+        System.out.println("Criando um vídeo\n");
+        System.out.println("Digite um titulo");
+        String titulo = entrada.nextLine();
+        System.out.println(" ");
+        System.out.println("Digite uma descrição");
+        String descricao = entrada.nextLine();
+        Video newVideo = new Video(titulo, descricao, canal, 0);
+        if(canal.criarNovoVideo(newVideo)){
+            clear();
+            System.out.println("Video criado com sucesso\n");
+            menuDeVideos(canal, dados, entrada);
+        }else{
+            clear();
+            System.out.println("Ocorreu um erro na criação\n");
+            menuDeVideos(canal, dados, entrada);
+        }
+
+    }
+
     public static void menu5_Historico(Usuario user, Dados dados, Scanner entrada){//Printa Histórico
         String opçoes = new String("Escolha um opção\n\n");
         opçoes +="  0 - voltar para pagina principal\n\n";
@@ -286,23 +327,8 @@ public abstract class Menu {
 
     }
 
-    public static void menu6(Video video, Dados dados, Scanner entrada){
-        if(video.getIsPausado()){
-            System.out.println("O video está pausado\n");
-        }else{
-            System.out.println("O video "+video.getTitulo()+" está passando\n");
-        }
-        switch (video.getVelocidade()) {
-            case 2:
-                System.out.println("Velocidade atual: 2x\n");
-                break;
-        
-            default:
-                System.out.println("Velocidade atual: 1x\n");
-                break;
-        }
-        System.out.println("Quantidade Gostei: "+video.getQtdGostei()+"\n");
-        System.out.println("Quantidade Não Gostei: "+video.getQtdNaoGostei()+"\n");
+    public static void menu6(Video video, Dados dados, Scanner entrada){//Menu referente ao video selecionado
+        System.out.println(video.videoToString());
         String opcoes = new String("Escolha uma opção\n\n");
         opcoes += "  0 - voltar canal\n";
         opcoes += "  1 - voltar página principal\n";

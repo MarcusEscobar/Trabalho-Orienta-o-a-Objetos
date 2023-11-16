@@ -90,8 +90,24 @@ public class Canal {
 		this.qtdEnquetes += i;
 	}
 
+	public Video buscarVideo(String titulo){
+		for(int i = 0; i < qtdVideos; i++){
+			if(videos[i].getTitulo().compareToIgnoreCase(titulo) == 0){return videos[i];}
+
+		}
+		return null;
+	}
+
+	public boolean criarNovoVideo(Video video){
+		if(qtdVideos < 50){
+			videos[qtdVideos]=video;
+			qtdVideos++;
+			return true;
+		}else{
+			return false;
+		}
+
+	}
 
 }
-
-
 

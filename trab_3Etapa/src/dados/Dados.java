@@ -54,7 +54,7 @@ public class Dados {
         return nome;
     }
     public void preencherComentarios(Video v, int qtdComentarios){
-        Comentario[] comentarios = new Comentario[qtdComentarios];
+        Comentario[] comentarios = new Comentario[50];
         for(int i = 0; i<qtdComentarios; i++){
             String s = String.valueOf(i+1);
             comentarios[i]= new Comentario("Comentario ".concat(s), new Usuario("user ".concat(s),"user ".concat(s)));}
@@ -64,13 +64,13 @@ public class Dados {
     }
     
     public void preencherVideos(Canal c, int qtdVideos){
-        Video[] videos = new Video[qtdVideos];
+        Video[] videos = new Video[50];
         int v = 0;
 
         for(int i = 0; i<qtdVideos ;i++){
             String s = String.valueOf(i+1);
             int views = random.nextInt(1, 1000);
-            videos[i] = new Video("Video ".concat(s), "Descrição ".concat(s), random.nextFloat(10, 60), c, views);
+            videos[i] = new Video("Video ".concat(s), "Descrição ".concat(s), c, views);
             videos[i].setQtdGostei(random.nextInt(0, 1000));
             videos[i].setQtdNaoGostei(random.nextInt(0, 500));
             preencherComentarios(videos[i],random.nextInt(1, 10) );
@@ -83,7 +83,7 @@ public class Dados {
     }
 
     public void preencherEnquetes(Canal c, int qtdEnquetes){
-        Enquete[] enquetes = new Enquete[qtdEnquetes];
+        Enquete[] enquetes = new Enquete[50];
 
         for(int i = 0; i < qtdEnquetes; i++){
             String s = String.valueOf(i);

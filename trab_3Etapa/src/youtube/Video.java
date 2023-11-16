@@ -3,7 +3,7 @@ package youtube;
 public class Video extends Publicacao {
     private String titulo;
     private String descricaoVideo;
-    private float duracaoVideo;//Segundos
+    //private float duracaoVideo;//Segundos
     private int qtdVisualizacoes;
 	private Canal autor;
 	private boolean isPausado = false;
@@ -12,10 +12,10 @@ public class Video extends Publicacao {
 
 
 
-	public Video(String titulo, String descricao, float duracaoVideo, Canal c, int views){
+	public Video(String titulo, String descricao, Canal c, int views){
         this.titulo = titulo;
         descricaoVideo = descricao;
-        this.duracaoVideo = duracaoVideo;
+       	//this.duracaoVideo = duracaoVideo;
         qtdGostei = 0;
         qtdNaoGostei = 0;
         qtdVisualizacoes = views;
@@ -39,15 +39,6 @@ public class Video extends Publicacao {
 	public void setDescricaoVideo(String descricaoVideo) {
 		this.descricaoVideo = descricaoVideo;
 	}
-
-	public float getDuracaoVideo() {
-		return duracaoVideo;
-	}
-
-	public void setDuracaoVideo(float duracaoVideo) {
-		this.duracaoVideo = duracaoVideo;
-	}
-
 	public int getQtdVisualizacoes() {
 		return qtdVisualizacoes;
 	}
@@ -79,5 +70,19 @@ public class Video extends Publicacao {
 		this.isPausado = isPausado;
 	}
 
-    
+    public String videoToString(){
+		String textoVideo = new String("Este é o video: "+titulo+" do canal "+autor.getNomeCanal()+"\n");
+		if(isPausado){textoVideo+="O video está pausado\n";}
+		else{textoVideo+="O video está passando\n";}
+		textoVideo +="Quantidade de visualizações: "+qtdVisualizacoes+"\n";
+		textoVideo +="Velocidade atual: "+velocidade+"x\n";
+		textoVideo += "Quantidade Gostei: "+qtdGostei+"\n";
+		textoVideo += "Quantidade Não Gostei: "+qtdNaoGostei+"\n";
+		textoVideo += "Descição: "+descricaoVideo+"\n";
+		return textoVideo;
+	
+	}
+	public void addViws(){
+		qtdVisualizacoes++;
+	}
 }
