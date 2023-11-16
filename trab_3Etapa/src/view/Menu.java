@@ -165,7 +165,7 @@ public abstract class Menu {
                 break;
             case 3:
                 clear();
-                menu5_Enquete(canal, dados, entrada);
+                menudeEnquetes(canal,dados,entrada);
                 break;
             default:
                 clear();
@@ -303,7 +303,62 @@ public abstract class Menu {
         }
     }
     
-    public static void menu5_Enquete(Canal canal, Dados dados, Scanner entrada){
+    public static void menudeEnquetes(Canal canal, Dados dados, Scanner entrada){
+        String opçoes = new String("Escolha um opção\n\n");
+        opçoes += "0 - voltar ao canal\n";//menu4
+        opçoes += "1 - Criar Enquete\n";
+        opçoes += "2 - listar todas as Enquetes\n";//MenuListarEnquetes
+        System.out.println(opçoes);
+        int valor = entrada.nextInt();
+        switch (valor) {
+            case 0:
+                clear();
+                menu4(dados, entrada,canal);//voltar
+                break;
+            case 1:
+                Menu17CriarEnquete(canal,dados,entrada);//criar
+                break;
+            case 2:
+                ListarEnquetes(canal,dados,entrada);//listar
+                break;
+                
+            default:
+                clear();
+                System.out.println("opção inválida");
+                menuDeVideos(canal, dados, entrada);
+                break;
+        }   	
+    }          
+                
+     public static void Menu17CriarEnquete(Canal canal, Dados dados, Scanner entrada) {
+    	 entrada.nextLine(); // limpando o buffer de entrada
+    	 System.out.println("Qual é a sua pergunta?\n");
+         String pergunta = entrada.nextLine();
+         System.out.println("Digite a 1° resposta\n");
+         String opçaoA = entrada.nextLine();
+         System.out.println("Digite a 2° resposta\n");
+         String opçaoB = entrada.nextLine();
+         System.out.println("Digite a 3° resposta\n");
+         String opçaoC = entrada.nextLine();
+         System.out.println("Digite a 4° resposta\n");
+         String opçaoD = entrada.nextLine();
+         Enquete createdEnquete = new Enquete(pergunta,opçaoA ,opçaoB,opçaoC,opçaoD, canal);
+        if( canal.adicionarEnquete(createdEnquete)) {
+        	System.out.println("Enquete Criado com Sucesso");
+        	menudeEnquetes(canal, dados, entrada);
+        }
+         else {
+			System.out.println("Não foi Possivel criar a Enquete");
+			menudeEnquetes(canal, dados, entrada);
+		}
+     }
+         
+         
+    	
+          
+    
+    
+    public static void ListarEnquetes(Canal canal, Dados dados, Scanner entrada){
         String opçoes = new String("Escolha um opção\n\n");
         opçoes +="  0 - voltar ao canal\n\n";
         opçoes+="Enquetes de "+canal.getNomeCanal()+"\n\n";       
@@ -317,12 +372,12 @@ public abstract class Menu {
             menu4(dados, entrada,canal);
         }else if(valor >= 1 && valor <= canal.getQtdEnquetes()){
             clear();
-            //Menu8
+            //Menu8Acessar/ler enquente
 
         }else{
             clear();
             System.out.println("Opção inválida");
-            menu5_Enquete(canal, dados, entrada);
+            ListarEnquetes(canal, dados, entrada);
         }
 
     }
