@@ -1,0 +1,21 @@
+Apartir do console 2, opção 1:
+    entra console 4:
+        0 - homePage
+        1 - inscrever
+        (CRUD video)
+        3 - criar vídeo
+        2 - listar todos os vídeos
+        2 - buscar video pelo titulo
+        4 - editar video
+        5 - excluir video
+        (CRUD enquete)
+        7 - criar enquete
+        6 - litar enquete
+        8 - editar enquete
+        9 - excluir enquete
+        (CRUD canal)
+        10 - editar canal
+        11 - excluir canal
+
+
+        

@@ -17,10 +17,14 @@ console 1:_É um console de criação, não possui opções de escolha apenas en
 console 2: Olá {User.nome}, o que deseja? _"Home page"_ 
         2.0 - Sair _Fecha o app_ [FEITO]
         2.1 - Listar Canais _Printa uma lista de todos o canais no banco de dados_ // _Entra no console 3_ [FEITO]
+        buscar canal pelo nome
         2.2 - Listar inscriçoes _Chama console 3, variante inscriçoes_ [FEITO]
         2.3 - Listar Historico [FEITO]
         2.4 - Editar usuario _console de edição 11_//_Pede senha Usuário_ 
         2.5 - Criar um canal _console de criação 10_
+        2.6   gerenciar canal(Onipotente)
+
+
     
  console 3: Canais Disponiveis [FEITO]
         3.0 Voltar _Retorna ao console 2_[FEITO]
