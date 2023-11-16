@@ -6,8 +6,6 @@ public class Usuario {
     private String nomeUsuario;
     private Canal[] inscricoes = new Canal[100];
     private int qtdInscrições = 0;
-    private Video[] historico = new Video[100];
-    private int qtdHistorico = 0;
     
     public Usuario( String senha, String nomeUsuario){
         //this.email = email;
@@ -84,29 +82,6 @@ public class Usuario {
     public void setQtdInscricoes(int qtdInscrições){
         this.qtdInscrições = qtdInscrições;
 
-    }
-
-    public Video[] gethistorico(){
-        return historico;
-    }
-
-    public Video getVideoHistorico(int i){//Semelhante a getIscricao, também recomendado um variavel auxiliar
-        return historico[i];
-    }
-
-    public void setHistorico(Video[] historico){
-        this.historico = historico;
-    }
-
-    public void setVideoHistorico(int i, Video v){
-        historico[i] = v;
-    }
-
-    public int getQtdHistorico() {
-        return qtdHistorico;
-    }
-    public void setQtdHistorico(int qtdHistorico) {
-        this.qtdHistorico = qtdHistorico;
     }
 }
 

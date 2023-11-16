@@ -121,5 +121,14 @@ public class Canal {
 
 	}
 
-}
+	public void deleteVideo(Video video){
+		int i = 0;
+		while (videos[i]!=video){i++;}
+		for(;i<qtdVideos;i++){
+			videos[i] = videos[i+1];
+		}
+		qtdVideos--;
 
+	}
+
+}

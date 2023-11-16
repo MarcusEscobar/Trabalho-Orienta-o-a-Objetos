@@ -112,6 +112,13 @@ public class Dados {
 
        return nomeCanais;
     }
+
+    public Canal buscarCanal(String nome){
+        for(int i = 0; i<qtdCanais; i++){
+            if(canais[i].getNomeCanal().compareToIgnoreCase(nome) == 0){return canais[i];}
+        }
+        return null;
+    }
     
 }  
 
