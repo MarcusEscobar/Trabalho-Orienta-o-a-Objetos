@@ -119,6 +119,17 @@ public class Dados {
         }
         return null;
     }
+
+    public boolean inserirCanal(Canal canal){
+        if(qtdCanais<100){
+            //possivel inserir
+            canais[qtdCanais] = canal;
+            qtdCanais++;
+            return true;
+        }else{
+            return false;
+        }
+    }   
     
 }  
 

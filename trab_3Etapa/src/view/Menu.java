@@ -56,6 +56,10 @@ public abstract class Menu {
                 clear();
                 buscarCanalPeloNome(dados, entrada);
                 break;
+            case 4:
+                clear();
+                criarCanal(dados, entrada);
+                break;
             
             default:
                 clear();
@@ -63,6 +67,20 @@ public abstract class Menu {
                 homePage(dados, entrada);//Recursividade, simulando loop de repetição
                 break;
         }
+    }
+
+    public static void criarCanal(Dados dados, Scanner entrada){
+        entrada.nextLine();
+        System.out.println("Criando um canal\n");
+        System.out.println("Digite um nome");
+        String nome = entrada.nextLine();
+        Canal newCanal = new Canal(nome, dados.getUsuario());
+        if(dados.inserirCanal(newCanal)){
+            System.out.println("Canal criado com sucesso");
+        }else{
+            System.out.println("Falha na criação do canal");
+        }
+
     }
 
     public static void listaCanais(Dados dados, Scanner entrada){
