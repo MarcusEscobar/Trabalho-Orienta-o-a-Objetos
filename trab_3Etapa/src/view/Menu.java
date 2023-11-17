@@ -384,15 +384,19 @@ public abstract class Menu {
     	 entrada.nextLine(); // limpando o buffer de entrada
     	 System.out.println("Qual é a sua pergunta?\n");
          String pergunta = entrada.nextLine();
-         System.out.println("Digite a 1° resposta\n");
-         String opçaoA = entrada.nextLine();
-         System.out.println("Digite a 2° resposta\n");
-         String opçaoB = entrada.nextLine();
-         System.out.println("Digite a 3° resposta\n");
-         String opçaoC = entrada.nextLine();
-         System.out.println("Digite a 4° resposta\n");
-         String opçaoD = entrada.nextLine();
-         Enquete createdEnquete = new Enquete(pergunta,opçaoA ,opçaoB,opçaoC,opçaoD, canal);
+         System.out.println("Serão quantas respostas possiveis?\n");
+         int numRespostas = entrada.nextInt();
+         entrada.nextLine();
+         String [] resposta = new String[numRespostas];
+         int[] qtdVotosEmCada = new int[numRespostas];
+         for (int i = 0; i < numRespostas; i++) {
+        	 System.out.println("Digite uma resposta: /n");
+        	 resposta[i] = entrada.nextLine();
+        	 qtdVotosEmCada[i] = 0;
+        	 
+		}
+         Enquete createdEnquete = new Enquete(pergunta, numRespostas, qtdVotosEmCada, resposta, canal);
+        
         if( canal.adicionarEnquete(createdEnquete)) {
         	System.out.println("Enquete Criado com Sucesso");
         	menuDeEnquetes(canal, dados, entrada);
@@ -426,6 +430,16 @@ public abstract class Menu {
         }
 
     }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
     public static void acessarVideo(Video video, Dados dados, Scanner entrada){//Menu referente ao video selecionado
         System.out.println(video.videoToString());
