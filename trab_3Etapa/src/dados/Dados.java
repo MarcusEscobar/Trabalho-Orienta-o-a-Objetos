@@ -112,6 +112,9 @@ public class Dados {
 
        return nomeCanais;
     }
+
+    public void setNomeCanal(Canal novoNomeCanal) {
+    }
     
 }  
 

@@ -31,7 +31,7 @@ public abstract class Menu {
     public static void menu2(Dados dados, Scanner entrada){
         System.out.println("Olá "+dados.getUsuario().getNomeUsuario()+", o que deseja?\n");
         String opçoes = new String("Escolha uma opção:\n\n");
-        opçoes += "  0 - sair\n";
+        opçoes += "  0 - Sair\n";
         opçoes += "  1 - Listar canais\n";
         opçoes += "  2 - Canais Inscritos\n";
         opçoes += "  3 - histórico\n";
@@ -135,7 +135,8 @@ public abstract class Menu {
         opçoes += "  2 - Menu de vídeos\n";
         opçoes += "  3 - Menu enquetes\n";
         opçoes += "  4 - Editar canal\n";
-        opçoes += "  5 - Excluir canal canal\n";
+        opçoes += "  5 - Excluir canal\n";
+        opçoes += "  6 - Informações do canal\n";
         System.out.println(opçoes);
         int valor = entrada.nextInt();
         switch (valor) {
@@ -167,6 +168,15 @@ public abstract class Menu {
                 clear();
                 menu5_Enquete(canal, dados, entrada);
                 break;
+            case 4:
+                //editar canal
+                clear();
+                EditarCanal(canal, dados, entrada);
+                break;
+            case 6:
+                clear();
+                InfoDoCanal(canal, dados, entrada);
+                break;
             default:
                 clear();
                 System.out.println("opção inválida");
@@ -176,11 +186,78 @@ public abstract class Menu {
             
     }
 
+    public static void EditarCanal(Canal canal, Dados dados, Scanner entrada){
+        entrada.nextLine();
+        System.out.println("Insira o novo nome do canal:\n");
+        String novoNome = entrada.nextLine();
+        System.out.println(" ");
+        System.out.println("Nome alterado com sucesso.");
+        canal.setNomeCanal(novoNome);
+        clear();
+        menu4(dados, entrada, canal);
+    }
+
+    public static void InfoDoCanal(Canal canal, Dados dados, Scanner entrada){
+        System.out.println("Informações do canal "+canal.getNomeCanal()+":\n");
+        System.out.println("Proprietario: "+canal.getProprietario().getNomeUsuario()+"\n");
+        System.out.println("Quantidade de inscritos: "+canal.getQtdInscritos()+"\n");
+        System.out.println("Quantidade de videos: "+canal.getQtdVideos()+"\n");
+        System.out.println("Quantidade de enquetes: "+canal.getQtdEnquetes()+"\n");
+        System.out.println("Total de visualizações no canal: "+canal.getTotalVisualizacoes()+"\n");
+
+        String opçoes = new String("0 - Voltar ao canal\n\n");
+        System.out.println(opçoes);
+        int valor = entrada.nextInt();
+        switch (valor) {
+            case 0:
+                menu4(dados, entrada, canal);
+                break;
+        
+            default:
+                menu4(dados, entrada, canal);
+                break;
+        }
+
+
+    }
+
+    public static void menuExcluirCanal(Canal canal, Dados dados, Scanner entrada){
+        String opçoes = new String("Tem certeza que deseja excluir o canal?\n\n");
+        opçoes += "0 - Sim\n";
+        opçoes += "1 - Não\n";
+        System.out.println(opçoes);
+        int valor = entrada.nextInt();
+        switch (valor) {
+            case 0:
+                clear();
+                ExcluirCanal(canal, dados);
+                menu3_Canais(dados, entrada);
+                break;
+            case 1:
+                clear();
+                menu4(dados, entrada, canal);
+                break;
+            default:
+                clear();
+                System.out.println("Opção inválida\n");
+                menu4(dados, entrada, canal);
+                break;
+        }
+
+
+    }
+
+    public static void ExcluirCanal(Canal canal, Dados dados){
+
+
+    }
+
+
     public static void menuDeVideos(Canal canal, Dados dados, Scanner entrada){
-        String opçoes = new String("Escolha um opção\n\n");
-        opçoes += "0 - voltar ao canal\n";//menu4
+        String opçoes = new String("Escolha uma opção\n\n");
+        opçoes += "0 - Voltar ao canal\n";//menu4
         opçoes += "1 - Criar video\n";
-        opçoes += "2 - listar todos os vídeos\n";//Menu5video
+        opçoes += "2 - Listar todos os vídeos\n";//Menu5video
         opçoes += "3 - Buscar video pelo título\n";
         System.out.println(opçoes);
         int valor = entrada.nextInt();
@@ -213,7 +290,7 @@ public abstract class Menu {
 
     public static void menu5_Videos(Canal canal, Dados dados, Scanner entrada){//Printa Videos Canal
         //Criar toString video
-        String opçoes = new String("Escolha um opção\n\n");
+        String opçoes = new String("Escolha uma opção\n\n");
         opçoes +="  0 - voltar ao canal\n\n";
         opçoes+="Videos de "+canal.getNomeCanal()+"\n\n";       
         for(int i = 1; i<= canal.getQtdVideos(); i++){
@@ -236,8 +313,8 @@ public abstract class Menu {
     }
     
     public static void menu5_Historico(Usuario user, Dados dados, Scanner entrada){//Printa Histórico
-        String opçoes = new String("Escolha um opção\n\n");
-        opçoes +="  0 - voltar para pagina principal\n\n";
+        String opçoes = new String("Escolha uma opção\n\n");
+        opçoes +="  0 - Voltar para pagina principal\n\n";
         opçoes+="Histórico de "+user.getNomeUsuario()+":\n\n";
         if(user.getQtdHistorico() == 0 ){
             opçoes +="Você não possui vídeos em seu histórico.\n";
