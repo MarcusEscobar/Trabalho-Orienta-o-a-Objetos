@@ -392,8 +392,7 @@ public abstract class Menu {
          for (int i = 0; i < numRespostas; i++) {
         	 System.out.println("Digite uma resposta: /n");
         	 resposta[i] = entrada.nextLine();
-        	 qtdVotosEmCada[i] = 0;
-        	 
+        	 qtdVotosEmCada[i] = 0; 	 
 		}
          Enquete createdEnquete = new Enquete(pergunta, numRespostas, qtdVotosEmCada, resposta, canal);
         
@@ -431,16 +430,6 @@ public abstract class Menu {
 
     }
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-
     public static void acessarVideo(Video video, Dados dados, Scanner entrada){//Menu referente ao video selecionado
         System.out.println(video.videoToString());
         String opcoes = new String("Escolha uma opção\n\n");

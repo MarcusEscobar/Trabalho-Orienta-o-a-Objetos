@@ -1,6 +1,5 @@
 package youtube;
 
-import java.util.Iterator;
 
 public class Enquete extends Publicacao {
     private String[] opcoes;
@@ -72,7 +71,6 @@ public class Enquete extends Publicacao {
 	}
 
 	public String enqueteToString() {
-		
 		String enqueteToText = new String("O canal " +autor+ "faz a seguinte pergunta: /n");
 		enqueteToText += pergunta + "/n";
 		String opcoesTextString = "";
@@ -82,8 +80,6 @@ public class Enquete extends Publicacao {
 		enqueteToText += opcoesTextString;
 		
 		return enqueteToText;
-		
-
 	}
 	
 	public void votar(int selecao) {
