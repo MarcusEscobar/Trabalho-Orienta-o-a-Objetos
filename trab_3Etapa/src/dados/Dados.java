@@ -130,6 +130,13 @@ public class Dados {
             return false;
         }
     }   
-    
-}  
 
+    public void excluirCanal(Canal canal){
+        int i = 0;
+        while(canais[i]!=canal){i++;}
+        for(;i<qtdCanais;i++){
+            canais[i] = canais[i+1];
+        }
+        qtdCanais--;
+    }
+}

@@ -76,9 +76,13 @@ public abstract class Menu {
         String nome = entrada.nextLine();
         Canal newCanal = new Canal(nome, dados.getUsuario());
         if(dados.inserirCanal(newCanal)){
+            clear();
             System.out.println("Canal criado com sucesso");
+            menuCanal(dados, entrada, newCanal);
         }else{
+            clear();
             System.out.println("Falha na criação do canal");
+            homePage(dados, entrada);
         }
 
     }
@@ -155,7 +159,7 @@ public abstract class Menu {
     }
 
     public static void menuCanal(Dados dados, Scanner entrada, Canal canal){
-        System.out.println("Este é o canal: "+canal.getNomeCanal());
+        System.out.println(canal.canalToString());
         String opçoes = new String("Escolha uma opção:\n\n");
         opçoes += "  0 - voltar para pagina principal\n";
         if(dados.getUsuario().inscricoesToString().contains(canal.getNomeCanal())){
@@ -168,7 +172,6 @@ public abstract class Menu {
         opçoes += "  3 - Menu enquetes\n";
         opçoes += "  4 - Editar canal\n";
         opçoes += "  5 - Excluir canal\n";
-        opçoes += "  6 - Informações do canal\n";
         System.out.println(opçoes);
         int valor = entrada.nextInt();
         switch (valor) {
@@ -193,7 +196,6 @@ public abstract class Menu {
                 break;
             case 2:
                 clear();
-               //menu5_Videos(canal, dados, entrada);
                 menuDeVideos(canal, dados, entrada);
                 break;
             case 3:
@@ -203,11 +205,7 @@ public abstract class Menu {
             case 4:
                 //editar canal
                 clear();
-                EditarCanal(canal, dados, entrada);
-                break;
-            case 6:
-                clear();
-                InfoDoCanal(canal, dados, entrada);
+                editarCanal(canal, dados, entrada);
                 break;
             default:
                 clear();
@@ -218,39 +216,15 @@ public abstract class Menu {
             
     }
 
-    public static void EditarCanal(Canal canal, Dados dados, Scanner entrada){
+    public static void editarCanal(Canal canal, Dados dados, Scanner entrada){
         entrada.nextLine();
         System.out.println("Insira o novo nome do canal:\n");
         String novoNome = entrada.nextLine();
         System.out.println(" ");
-        System.out.println("Nome alterado com sucesso.");
         canal.setNomeCanal(novoNome);
         clear();
+        System.out.println("Nome alterado com sucesso.");
         menuCanal(dados, entrada, canal);
-    }
-
-    public static void InfoDoCanal(Canal canal, Dados dados, Scanner entrada){
-        System.out.println("Informações do canal "+canal.getNomeCanal()+":\n");
-        System.out.println("Proprietario: "+canal.getProprietario().getNomeUsuario()+"\n");
-        System.out.println("Quantidade de inscritos: "+canal.getQtdInscritos()+"\n");
-        System.out.println("Quantidade de videos: "+canal.getQtdVideos()+"\n");
-        System.out.println("Quantidade de enquetes: "+canal.getQtdEnquetes()+"\n");
-        System.out.println("Total de visualizações no canal: "+canal.getTotalVisualizacoes()+"\n");
-
-        String opçoes = new String("0 - Voltar ao canal\n\n");
-        System.out.println(opçoes);
-        int valor = entrada.nextInt();
-        switch (valor) {
-            case 0:
-                menuCanal(dados, entrada, canal);
-                break;
-        
-            default:
-                menuCanal(dados, entrada, canal);
-                break;
-        }
-
-
     }
 
     public static void menuExcluirCanal(Canal canal, Dados dados, Scanner entrada){
@@ -262,11 +236,13 @@ public abstract class Menu {
         switch (valor) {
             case 0:
                 clear();
-                ExcluirCanal(canal, dados);
+                dados.excluirCanal(canal);
+                System.out.println("Canal excluido com sucesso\n");
                 listaCanais(dados, entrada);
                 break;
             case 1:
                 clear();
+                System.out.println("Canal não foi excluido\n");
                 menuCanal(dados, entrada, canal);
                 break;
             default:
@@ -275,15 +251,7 @@ public abstract class Menu {
                 menuCanal(dados, entrada, canal);
                 break;
         }
-
-
     }
-
-    public static void ExcluirCanal(Canal canal, Dados dados){
-
-
-    }
-
 
     public static void menuDeVideos(Canal canal, Dados dados, Scanner entrada){
         String opçoes = new String("Escolha um opção\n\n");
@@ -319,8 +287,6 @@ public abstract class Menu {
 
     }
 
-
-    
     public static void buscarPeloTitulo(Dados dados, Canal canal, Scanner entrada){ 
         System.out.println("buscando\n");
         System.out.println("digite o titulo de um vídeo");
@@ -570,17 +536,30 @@ public abstract class Menu {
         entrada.nextLine();
         Canal autor = video.getAutor();
         System.out.println("Deseja mesmo excluir esse video");
-        System.out.println("digite 's' para confirmar");
-        String delete = entrada.nextLine();
-        if(delete.compareToIgnoreCase("s")==0){
-            video.getAutor().deleteVideo(video);
-            clear();
-            System.out.println("Video excluido com sucesso");
-            menuCanal(dados, entrada, autor);
-        }else{
-            clear();
-            System.out.println("Video não foi excluido");
-            acessarVideo(video, dados, entrada);
+        String opcoes =new String("Escolha uma opção\n\n");
+        opcoes+="0 - sim";
+        opcoes+="1 - não";
+        System.out.println(opcoes);
+
+        int delete = entrada.nextInt();
+        switch (delete) {
+            case 0:
+                video.getAutor().deleteVideo(video);
+                clear();
+                System.out.println("Video excluido com sucesso");
+                menuCanal(dados, entrada, autor);          
+                break;
+            case 1:
+                clear();
+                System.out.println("Video não foi excluido");
+                acessarVideo(video, dados, entrada);
+                break;
+        
+            default:
+                clear();
+                System.out.println("Opção inválida");
+                acessarVideo(video, dados, entrada);
+                break;
         }
     }
 

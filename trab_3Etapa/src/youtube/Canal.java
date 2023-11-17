@@ -131,4 +131,15 @@ public class Canal {
 
 	}
 
+	public String canalToString(){
+		String textoCanal = new String("Este é o canal: "+nomeCanal+"\n");
+		textoCanal+="Proprietario: "+proprietario.getNomeUsuario()+"\n";
+		textoCanal+="Quantidade de inscritos: "+qtdInscritos+"\n";
+		textoCanal+="Quantidade de videos: "+qtdVideos+"\n";
+		textoCanal+="Quantidade de enquetes: "+qtdEnquetes+"\n";
+		textoCanal+="Total de visualizações: "+totalVisualizacoes+"\n";
+
+		return textoCanal;
+	}
+
 }
