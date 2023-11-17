@@ -366,6 +366,7 @@ public abstract class Menu {
         }
 
     }    
+   
     public static void menuDeEnquetes(Canal canal, Dados dados, Scanner entrada){
         String opçoes = new String("Escolha um opção\n\n");
         opçoes += "0 - voltar ao canal\n";//menuCanal
