@@ -77,11 +77,11 @@ public abstract class Menu {
         Canal newCanal = new Canal(nome, dados.getUsuario());
         if(dados.inserirCanal(newCanal)){
             clear();
-            System.out.println("Canal criado com sucesso");
+            System.out.println("Canal criado com sucesso\n");
             menuCanal(dados, entrada, newCanal);
         }else{
             clear();
-            System.out.println("Falha na criação do canal");
+            System.out.println("Falha na criação do canal\n");
             homePage(dados, entrada);
         }
 
@@ -206,6 +206,11 @@ public abstract class Menu {
                 //editar canal
                 clear();
                 editarCanal(canal, dados, entrada);
+                break;
+            case 5:
+                //editar canal
+                clear();
+                menuExcluirCanal(canal, dados, entrada);
                 break;
             default:
                 clear();
