@@ -269,7 +269,7 @@ public abstract class Menu {
 
     public static void menuDeVideos(Canal canal, Dados dados, Scanner entrada){
         String opçoes = new String("Escolha um opção\n\n");
-        opçoes += "0 - voltar ao canal\n";//menuCanal
+        opçoes += "0 - voltar ao canal\n";//menu4
         opçoes += "1 - Criar video\n";
         opçoes += "2 - Listar todos os vídeos\n";//Menu5video
         opçoes += "3 - Buscar video pelo título\n";
