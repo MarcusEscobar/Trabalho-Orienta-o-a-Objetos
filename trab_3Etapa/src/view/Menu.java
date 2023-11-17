@@ -27,7 +27,7 @@ public abstract class Menu {
         clear();
         homePage(dados, entrada);
     }
-
+    
     public static void homePage(Dados dados, Scanner entrada){
         System.out.println("Olá "+dados.getUsuario().getNomeUsuario()+", o que deseja?\n");
         String opçoes = new String("Escolha uma opção:\n\n");
@@ -69,6 +69,7 @@ public abstract class Menu {
         }
     }
 
+//CANAL
     public static void criarCanal(Dados dados, Scanner entrada){
         entrada.nextLine();
         System.out.println("Criando um canal\n");
@@ -108,6 +109,43 @@ public abstract class Menu {
             System.out.println("Opção inválida");
             clear();
             listaCanais(dados, entrada);
+        }
+    }
+    
+    public static void editarCanal(Canal canal, Dados dados, Scanner entrada){
+        entrada.nextLine();
+        System.out.println("Insira o novo nome do canal:\n");
+        String novoNome = entrada.nextLine();
+        System.out.println(" ");
+        canal.setNomeCanal(novoNome);
+        clear();
+        System.out.println("Nome alterado com sucesso.");
+        menuCanal(dados, entrada, canal);
+    }
+
+    public static void excluirCanal(Canal canal, Dados dados, Scanner entrada){
+        String opçoes = new String("Tem certeza que deseja excluir o canal?\n\n");
+        opçoes += "0 - Sim\n";
+        opçoes += "1 - Não\n";
+        System.out.println(opçoes);
+        int valor = entrada.nextInt();
+        switch (valor) {
+            case 0:
+                clear();
+                dados.deletarCanal(canal);
+                System.out.println("Canal excluido com sucesso\n");
+                listaCanais(dados, entrada);
+                break;
+            case 1:
+                clear();
+                System.out.println("Canal não foi excluido\n");
+                menuCanal(dados, entrada, canal);
+                break;
+            default:
+                clear();
+                System.out.println("Opção inválida\n");
+                menuCanal(dados, entrada, canal);
+                break;
         }
     }
     
@@ -210,7 +248,7 @@ public abstract class Menu {
             case 5:
                 //editar canal
                 clear();
-                menuExcluirCanal(canal, dados, entrada);
+                excluirCanal(canal, dados, entrada);
                 break;
             default:
                 clear();
@@ -221,97 +259,29 @@ public abstract class Menu {
             
     }
 
-    public static void editarCanal(Canal canal, Dados dados, Scanner entrada){
+//VIDEO
+    public static void criarVideo(Dados dados,Scanner entrada, Canal canal){
         entrada.nextLine();
-        System.out.println("Insira o novo nome do canal:\n");
-        String novoNome = entrada.nextLine();
-        System.out.println(" ");
-        canal.setNomeCanal(novoNome);
-        clear();
-        System.out.println("Nome alterado com sucesso.");
-        menuCanal(dados, entrada, canal);
-    }
-
-    public static void menuExcluirCanal(Canal canal, Dados dados, Scanner entrada){
-        String opçoes = new String("Tem certeza que deseja excluir o canal?\n\n");
-        opçoes += "0 - Sim\n";
-        opçoes += "1 - Não\n";
-        System.out.println(opçoes);
-        int valor = entrada.nextInt();
-        switch (valor) {
-            case 0:
-                clear();
-                dados.excluirCanal(canal);
-                System.out.println("Canal excluido com sucesso\n");
-                listaCanais(dados, entrada);
-                break;
-            case 1:
-                clear();
-                System.out.println("Canal não foi excluido\n");
-                menuCanal(dados, entrada, canal);
-                break;
-            default:
-                clear();
-                System.out.println("Opção inválida\n");
-                menuCanal(dados, entrada, canal);
-                break;
-        }
-    }
-
-    public static void menuDeVideos(Canal canal, Dados dados, Scanner entrada){
-        String opçoes = new String("Escolha um opção\n\n");
-        opçoes += "0 - voltar ao canal\n";//menu4
-        opçoes += "1 - Criar video\n";
-        opçoes += "2 - Listar todos os vídeos\n";//Menu5video
-        opçoes += "3 - Buscar video pelo título\n";
-        System.out.println(opçoes);
-        int valor = entrada.nextInt();
-        switch (valor) {
-            case 0:
-                clear();
-                menuCanal(dados, entrada,canal);
-                break;
-            case 1:
-                clear();
-                criarVideo(dados, entrada, canal);
-                break;
-            case 2:
-                clear();
-                listarVideos(canal, dados, entrada);
-                break;
-            case 3:
-                clear();
-                buscarPeloTitulo(dados, canal, entrada);
-                break;
-            default:
-                clear();
-                System.out.println("opção inválida");
-                menuDeVideos(canal, dados, entrada);
-                break;
-        }
-
-    }
-
-    public static void buscarPeloTitulo(Dados dados, Canal canal, Scanner entrada){ 
-        System.out.println("buscando\n");
-        System.out.println("digite o titulo de um vídeo");
-        entrada.nextLine();//Limpando Buffer de entrada
+        System.out.println("Criando um vídeo\n");
+        System.out.println("Digite um titulo");
         String titulo = entrada.nextLine();
-        Video video = canal.buscarVideo(titulo);
-         if(video==null){
-             clear();
-             System.out.println("Video não encontrado");
-             menuDeVideos(canal, dados, entrada);
-         }else{
-             clear();
-             video.addViws();
-             acessarVideo(video, dados, entrada);
-         }
+        System.out.println(" ");
+        System.out.println("Digite uma descrição");
+        String descricao = entrada.nextLine();
+        Video newVideo = new Video(titulo, descricao, canal, 0);
+        if(canal.criarNovoVideo(newVideo)){
+            clear();
+            System.out.println("Video criado com sucesso\n");
+            menuDeVideos(canal, dados, entrada);
+        }else{
+            clear();
+            System.out.println("Ocorreu um erro na criação\n");
+            menuDeVideos(canal, dados, entrada);
+        }
 
-         
-    }
+    }    
 
-    public static void listarVideos(Canal canal, Dados dados, Scanner entrada){//Printa Videos Canal
+     public static void listarVideos(Canal canal, Dados dados, Scanner entrada){
         String opçoes = new String("Escolha um opção\n\n");
         opçoes +="  0 - voltar ao canal\n\n";
         opçoes+="Videos de "+canal.getNomeCanal()+"\n\n";       
@@ -334,108 +304,8 @@ public abstract class Menu {
             listarVideos(canal, dados, entrada);
         }
     }
-   
-    public static void criarVideo(Dados dados,Scanner entrada, Canal canal){
-        entrada.nextLine();
-        System.out.println("Criando um vídeo\n");
-        System.out.println("Digite um titulo");
-        String titulo = entrada.nextLine();
-        System.out.println(" ");
-        System.out.println("Digite uma descrição");
-        String descricao = entrada.nextLine();
-        Video newVideo = new Video(titulo, descricao, canal, 0);
-        if(canal.criarNovoVideo(newVideo)){
-            clear();
-            System.out.println("Video criado com sucesso\n");
-            menuDeVideos(canal, dados, entrada);
-        }else{
-            clear();
-            System.out.println("Ocorreu um erro na criação\n");
-            menuDeVideos(canal, dados, entrada);
-        }
 
-    }    
-   
-    public static void menuDeEnquetes(Canal canal, Dados dados, Scanner entrada){
-        String opçoes = new String("Escolha um opção\n\n");
-        opçoes += "0 - voltar ao canal\n";//menuCanal
-        opçoes += "1 - Criar Enquete\n";
-        opçoes += "2 - listar todas as Enquetes\n";//MenulistarEnquetes
-        System.out.println(opçoes);
-        int valor = entrada.nextInt();
-        switch (valor) {
-            case 0:
-                clear();
-                menuCanal(dados, entrada,canal);//voltar
-                break;
-            case 1:
-                clear();
-                criarEnquete(canal,dados,entrada);//criar
-                break;
-            case 2:
-                clear();
-                listarEnquetes(canal,dados,entrada);//listar
-                break;
-                
-            default:
-                clear();
-                System.out.println("opção inválida");
-                menuDeEnquetes(canal, dados, entrada);
-                break;
-        }   	
-    }          
-                
-     public static void criarEnquete(Canal canal, Dados dados, Scanner entrada) {
-    	 entrada.nextLine(); // limpando o buffer de entrada
-    	 System.out.println("Qual é a sua pergunta?\n");
-         String pergunta = entrada.nextLine();
-         System.out.println("Serão quantas respostas possiveis?\n");
-         int numRespostas = entrada.nextInt();
-         entrada.nextLine();
-         String [] resposta = new String[numRespostas];
-         int[] qtdVotosEmCada = new int[numRespostas];
-         for (int i = 0; i < numRespostas; i++) {
-        	 System.out.println("Digite uma resposta: /n");
-        	 resposta[i] = entrada.nextLine();
-        	 qtdVotosEmCada[i] = 0; 	 
-		}
-         Enquete createdEnquete = new Enquete(pergunta, numRespostas, qtdVotosEmCada, resposta, canal);
-        
-        if( canal.adicionarEnquete(createdEnquete)) {
-        	System.out.println("Enquete Criado com Sucesso");
-        	menuDeEnquetes(canal, dados, entrada);
-        }
-         else {
-			System.out.println("Não foi Possivel criar a Enquete");
-			menuDeEnquetes(canal, dados, entrada);
-		}
-     }
-         
-    public static void listarEnquetes(Canal canal, Dados dados, Scanner entrada){
-        String opçoes = new String("Escolha um opção\n\n");
-        opçoes +="  0 - voltar ao canal\n\n";
-        opçoes+="Enquetes de "+canal.getNomeCanal()+"\n\n";       
-        for(int i = 1; i<= canal.getQtdEnquetes(); i++){
-            String s = String.valueOf(i);//Transformo j em string
-            opçoes += new String("  "+s+" - "+canal.getEnquete(i-1).getPergunta()+"\n");
-        }System.out.println(opçoes);
-        int valor = entrada.nextInt();
-        if(valor == 0){
-            clear();
-            menuCanal(dados, entrada,canal);
-        }else if(valor >= 1 && valor <= canal.getQtdEnquetes()){
-            clear();
-            //Menu8Acessar/ler enquente
-
-        }else{
-            clear();
-            System.out.println("Opção inválida");
-            listarEnquetes(canal, dados, entrada);
-        }
-
-    }
-    
-    public static void acessarVideo(Video video, Dados dados, Scanner entrada){//Menu referente ao video selecionado
+    public static void acessarVideo(Video video, Dados dados, Scanner entrada){
         System.out.println(video.videoToString());
         String opcoes = new String("Escolha uma opção\n\n");
         opcoes += "  0 - voltar canal\n";
@@ -525,8 +395,8 @@ public abstract class Menu {
                 break;
         }
     }
-    
-    public static void editarVideo(Dados dados, Scanner entrada, Video video){
+
+     public static void editarVideo(Dados dados, Scanner entrada, Video video){
         entrada.nextLine();//limpa entrada
         System.out.println("Digite um novo titulo");
         String newTitulo = entrada.nextLine();
@@ -539,8 +409,8 @@ public abstract class Menu {
         System.out.println("Video editado com sucesso\n");
         acessarVideo(video, dados, entrada);
     }
-    
-    public static void excluirVideo(Dados dados, Scanner entrada, Video video){
+
+     public static void excluirVideo(Dados dados, Scanner entrada, Video video){
         entrada.nextLine();
         Canal autor = video.getAutor();
         System.out.println("Deseja mesmo excluir esse video");
@@ -571,10 +441,145 @@ public abstract class Menu {
         }
     }
 
+    public static void buscarPeloTitulo(Dados dados, Canal canal, Scanner entrada){ 
+        System.out.println("buscando\n");
+        System.out.println("digite o titulo de um vídeo");
+        entrada.nextLine();//Limpando Buffer de entrada
+        String titulo = entrada.nextLine();
+        Video video = canal.buscarVideo(titulo);
+         if(video==null){
+             clear();
+             System.out.println("Video não encontrado");
+             menuDeVideos(canal, dados, entrada);
+         }else{
+             clear();
+             video.addViws();
+             acessarVideo(video, dados, entrada);
+         }
+
+         
+    }
+
+    public static void menuDeVideos(Canal canal, Dados dados, Scanner entrada){
+        String opçoes = new String("Escolha um opção\n\n");
+        opçoes += "0 - voltar ao canal\n";//menu4
+        opçoes += "1 - Criar video\n";
+        opçoes += "2 - Listar todos os vídeos\n";//Menu5video
+        opçoes += "3 - Buscar video pelo título\n";
+        System.out.println(opçoes);
+        int valor = entrada.nextInt();
+        switch (valor) {
+            case 0:
+                clear();
+                menuCanal(dados, entrada,canal);
+                break;
+            case 1:
+                clear();
+                criarVideo(dados, entrada, canal);
+                break;
+            case 2:
+                clear();
+                listarVideos(canal, dados, entrada);
+                break;
+            case 3:
+                clear();
+                buscarPeloTitulo(dados, canal, entrada);
+                break;
+            default:
+                clear();
+                System.out.println("opção inválida");
+                menuDeVideos(canal, dados, entrada);
+                break;
+        }
+
+    }
+   
+   
+//ENQUETE
+    public static void menuDeEnquetes(Canal canal, Dados dados, Scanner entrada){
+        String opçoes = new String("Escolha um opção\n\n");
+        opçoes += "0 - voltar ao canal\n";//menuCanal
+        opçoes += "1 - Criar Enquete\n";
+        opçoes += "2 - listar todas as Enquetes\n";//MenulistarEnquetes
+        System.out.println(opçoes);
+        int valor = entrada.nextInt();
+        switch (valor) {
+            case 0:
+                clear();
+                menuCanal(dados, entrada,canal);//voltar
+                break;
+            case 1:
+                clear();
+                criarEnquete(canal,dados,entrada);//criar
+                break;
+            case 2:
+                clear();
+                listarEnquetes(canal,dados,entrada);//listar
+                break;
+                
+            default:
+                clear();
+                System.out.println("opção inválida");
+                menuDeEnquetes(canal, dados, entrada);
+                break;
+        }   	
+    }          
+                
+     public static void criarEnquete(Canal canal, Dados dados, Scanner entrada) {
+    	 entrada.nextLine(); // limpando o buffer de entrada
+    	 System.out.println("Qual é a sua pergunta?\n");
+         String pergunta = entrada.nextLine();
+         System.out.println("Serão quantas respostas possiveis?\n");
+         int numRespostas = entrada.nextInt();
+         entrada.nextLine();
+         String [] resposta = new String[numRespostas];
+         int[] qtdVotosEmCada = new int[numRespostas];
+         for (int i = 0; i < numRespostas; i++) {
+        	 System.out.println("Digite uma resposta: /n");
+        	 resposta[i] = entrada.nextLine();
+        	 qtdVotosEmCada[i] = 0; 	 
+		}
+         Enquete createdEnquete = new Enquete(pergunta, numRespostas, qtdVotosEmCada, resposta, canal);
+        
+        if( canal.adicionarEnquete(createdEnquete)) {
+        	System.out.println("Enquete Criado com Sucesso");
+        	menuDeEnquetes(canal, dados, entrada);
+        }
+         else {
+			System.out.println("Não foi Possivel criar a Enquete");
+			menuDeEnquetes(canal, dados, entrada);
+		}
+     }
+         
+    public static void listarEnquetes(Canal canal, Dados dados, Scanner entrada){
+        String opçoes = new String("Escolha um opção\n\n");
+        opçoes +="  0 - voltar ao canal\n\n";
+        opçoes+="Enquetes de "+canal.getNomeCanal()+"\n\n";       
+        for(int i = 1; i<= canal.getQtdEnquetes(); i++){
+            String s = String.valueOf(i);//Transformo j em string
+            opçoes += new String("  "+s+" - "+canal.getEnquete(i-1).getPergunta()+"\n");
+        }System.out.println(opçoes);
+        int valor = entrada.nextInt();
+        if(valor == 0){
+            clear();
+            menuCanal(dados, entrada,canal);
+        }else if(valor >= 1 && valor <= canal.getQtdEnquetes()){
+            clear();
+            //Menu8Acessar/ler enquente
+
+        }else{
+            clear();
+            System.out.println("Opção inválida");
+            listarEnquetes(canal, dados, entrada);
+        }
+
+    }
+    
+//COMENTÁRIO
     public static void lerComentarios(Dados dados, Scanner entrada, Video video){
-        String opcao = new String("Escolha uma opção\n\n");
-        opcao += "  0 - Retornar ao video\n\n";
-        opcao +="Comentários de "+video.getTitulo()+" do canal "+video.getAutor().getNomeCanal()+"\n";
+    String opcao = new String("Escolha uma opção\n\n");
+    opcao += "  0 - Retornar ao video\n\n";
+    opcao +="Comentários de "+video.getTitulo()+" do canal "+video.getAutor().getNomeCanal()+"\n";
         for(int i = 1; i <= video.getQtdComentarios();i++){
             String s = String.valueOf(i);
             opcao += new String("  "+s+" - "+video.getComentario(i-1).comentarioToString()+"\n");

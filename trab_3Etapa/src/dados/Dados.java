@@ -139,7 +139,7 @@ public class Dados {
         }
     }   
 
-    public void excluirCanal(Canal canal){
+    public void deletarCanal(Canal canal){
         int i = 0;
         while(canais[i]!=canal){i++;}
         for(;i<qtdCanais;i++){
