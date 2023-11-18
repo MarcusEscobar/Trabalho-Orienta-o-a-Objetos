@@ -14,26 +14,26 @@ public class Dados {
         return user;
     }
 
-    public void setUsuario(Usuario user){//Provavemente não será usado
+    public void setUsuario(Usuario user){
         this.user = user;
     }
 
-    public Canal[] getCanais(){//Provavemente não será usado
+    public Canal[] getCanais(){//Remove
         return canais;
     }
     public Canal getCanal(int i){
         return canais[i];
     }
-    public void setCanais(Canal[] canais){
+    public void setCanais(Canal[] canais){//Remove
         this.canais = canais;
     }
-    public void setCanal(int i,Canal c){
+    public void setCanal(int i,Canal c){//Remove
         canais[i] = c;
     }
     public  int getQtdCanais(){
         return qtdCanais;
     }
-    public  void setQtdCanais(int qtdCanais){
+    public  void setQtdCanais(int qtdCanais){//Remove
         this.qtdCanais = qtdCanais;
     }
 
@@ -53,6 +53,7 @@ public class Dados {
         nome = nome.substring(0,1).toUpperCase().concat(nome.substring(1));//Primeira letra Maiúscula
         return nome;
     }
+    
     public void preencherComentarios(Video v, int qtdComentarios){
         Comentario[] comentarios = new Comentario[50];
         for(int i = 0; i<qtdComentarios; i++){
@@ -100,6 +101,7 @@ public class Dados {
                    }
         c.setEnqueteS(enquetes);
         c.setQtdEnquetes(qtdEnquetes);
+        
     }
 
     public void preencherCanais(){
@@ -108,17 +110,9 @@ public class Dados {
             canais[i] = new Canal(nomeRandom , new Usuario(nomeRandom.concat("Senha"), nomeRandom.concat("User")));
             preencherVideos(canais[i], random.nextInt(3,10));
             preencherEnquetes(canais[i], random.nextInt(3,10));
+            canais[i].setQtdInscritos(random.nextInt(100, 1000));
             qtdCanais++;
         }
-    }
-
-    public String canaisToString(){
-       String nomeCanais = new String("");
-       for(int i = 0; i < qtdCanais; i++){
-        nomeCanais += new String(" "+canais[i].getNomeCanal());
-       }
-
-       return nomeCanais;
     }
 
     public Canal buscarCanal(String nome){

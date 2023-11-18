@@ -3,15 +3,11 @@ package youtube;
 public class Video extends Publicacao {
     private String titulo;
     private String descricaoVideo;
-    //private float duracaoVideo;//Segundos
     private int qtdVisualizacoes;
 	private Canal autor;
 	private boolean isPausado = false;
 	private int velocidade = 1;
 	
-
-
-
 	public Video(String titulo, String descricao, Canal c, int views){
         this.titulo = titulo;
         descricaoVideo = descricao;
@@ -22,8 +18,6 @@ public class Video extends Publicacao {
 		autor = c;
     }
 	
-	
-
     public String getTitulo() {
 		return titulo;
 	}
@@ -32,29 +26,30 @@ public class Video extends Publicacao {
 		this.titulo = titulo;
 	}
 
-	public String getDescricaoVideo() {
+	public String getDescricaoVideo() {//Remove
 		return descricaoVideo;
 	}
 
 	public void setDescricaoVideo(String descricaoVideo) {
 		this.descricaoVideo = descricaoVideo;
 	}
-	public int getQtdVisualizacoes() {
+	public int getQtdVisualizacoes() {//Remove
 		return qtdVisualizacoes;
 	}
 
-	public void setQtdVisualizacoes(int qtdVisualizacoes) {
+	public void setQtdVisualizacoes(int qtdVisualizacoes){//Remove
 		this.qtdVisualizacoes = qtdVisualizacoes;
 	}
 
-	public Canal getAutor() {
+	public Canal getAutor(){
 		return autor;
 	}
 
-	public void setAutor(Canal autor) {
+	public void setAutor(Canal autor) {//Remove
 		this.autor = autor;
 	}
-		public int getVelocidade() {
+	
+	public int getVelocidade() {
 		return velocidade;
 	}
 
@@ -82,6 +77,7 @@ public class Video extends Publicacao {
 		return textoVideo;
 	
 	}
+	
 	public void addViws(){
 		qtdVisualizacoes++;
 	}

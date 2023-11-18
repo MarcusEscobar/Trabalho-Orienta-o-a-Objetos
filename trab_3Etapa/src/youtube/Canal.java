@@ -39,23 +39,23 @@ public class Canal {
 	public void setQtdVideos(int qtdVideos) {
 		this.qtdVideos = qtdVideos;
 	}
-	public void somarQtdVideos(int i){
+	public void somarQtdVideos(int i){//Remove
 		this.qtdVideos += i;
 	}
 
-	public int getTotalVisualizacoes() {
+	public int getTotalVisualizacoes() {//Remove
 		return totalVisualizacoes;
 	}
 	public void setTotalVisualizacoes(int totalVisualizacoes) {
 		this.totalVisualizacoes = totalVisualizacoes;//Adicionar metododo viws++
 	}
-	public Usuario getProprietario() {
+	public Usuario getProprietario() {//Remove
 		return proprietario;
 	}
-	public void setProprietario(Usuario proprietario) {
+	public void setProprietario(Usuario proprietario) {//Remove
 		this.proprietario = proprietario;
 	}
-	public Video[] getVideos(){
+	public Video[] getVideos(){//Remove
 		return videos;
 	}
 	public Video getVideo(int i){
@@ -64,13 +64,13 @@ public class Canal {
 	public void setVideos(Video[] videos){
 		this.videos = videos;
 	}
-	public void setVideo(int i,Video v){
+	public void setVideo(int i,Video v){//Remove
 		videos[i] = v;
 	}
-	public Enquete[] getEnquetes(){
+	public Enquete[] getEnquetes(){//Remove
 		return enquetes;
 	}
-	public Enquete getEnquete(int i){
+	public Enquete getEnquete(int i){//Remove
 		return enquetes[i];
 	}
 	public void setEnqueteS(Enquete[] enquetes){
@@ -86,7 +86,7 @@ public class Canal {
 		this.qtdEnquetes = qtdEnquetes;
 
 	}
-	public void somarQtdEnquetes(int i){
+	public void somarQtdEnquetes(int i){//Remove
 		this.qtdEnquetes += i;
 	}
 
@@ -98,11 +98,10 @@ public class Canal {
 			enquetes[qtdEnquetes] = novaEnquete;
 			qtdEnquetes++;
 			return true;
-		}
-		
-        
-        
-	}	public Video buscarVideo(String titulo){
+		}  
+	}	
+
+	public Video buscarVideo(String titulo){
 		for(int i = 0; i < qtdVideos; i++){
 			if(videos[i].getTitulo().compareToIgnoreCase(titulo) == 0){return videos[i];}
 

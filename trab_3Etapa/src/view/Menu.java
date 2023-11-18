@@ -317,7 +317,7 @@ public abstract class Menu {
             opcoes += "  3 - Não gostei\n";
         }else{
             opcoes += "  2 - Gostei\n";}
-        opcoes += "  4 - Ler comentários\n";
+        opcoes += "  4 - Listar comentários\n";
         if(video.getIsPausado()){
              opcoes += "  5 - Reproduzir\n";
         }else{
@@ -358,7 +358,7 @@ public abstract class Menu {
                 break;
             case 4:
                 clear();
-                lerComentarios(dados, entrada, video);
+                listarComentarios(dados, entrada, video);
                 break;
             case 5:
                 if(video.getIsPausado()){
@@ -576,10 +576,11 @@ public abstract class Menu {
     }
     
 //COMENTÁRIO
-    public static void lerComentarios(Dados dados, Scanner entrada, Video video){
+    public static void listarComentarios(Dados dados, Scanner entrada, Video video){
     String opcao = new String("Escolha uma opção\n\n");
     opcao += "  0 - Retornar ao video\n\n";
     opcao +="Comentários de "+video.getTitulo()+" do canal "+video.getAutor().getNomeCanal()+"\n";
+    if(video.getQtdComentarios() == 0){System.out.println("O vídeo não possui comentários");}
         for(int i = 1; i <= video.getQtdComentarios();i++){
             String s = String.valueOf(i);
             opcao += new String("  "+s+" - "+video.getComentario(i-1).comentarioToString()+"\n");
@@ -595,7 +596,7 @@ public abstract class Menu {
         }else{
             clear();
             System.out.println("Opção inválida");
-            lerComentarios(dados, entrada, video);
+            listarComentarios(dados, entrada, video);
         }
 
     }

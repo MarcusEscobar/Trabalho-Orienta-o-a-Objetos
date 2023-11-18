@@ -1,7 +1,6 @@
 package youtube;
 
 public class Usuario {
-    //private String email; possivelmente não usaremos esse atributo
     private String senha;
     private String nomeUsuario;
     private Canal[] inscricoes = new Canal[100];
@@ -13,32 +12,23 @@ public class Usuario {
         this.nomeUsuario = nomeUsuario;
     
     }
-//Gets e Sets
-/*
-    public String getEmail(){
-        return email;
-    }
-    public void setEmail(String email){
-        this.email = email;
-    }
- 
-*/
-    public String getSenha(){
+    public String getSenha(){//Remove
         return senha;
     }
-    public void setSenha(String senha){
+    public void setSenha(String senha){//Remove
         this.senha = senha;
     }
     public String getNomeUsuario(){
         return nomeUsuario;
     }
-    public void setNomeUsuario(String nomeUsuario){
+    public void setNomeUsuario(String nomeUsuario){//Remove
         this.nomeUsuario = nomeUsuario;
     }
 
-    public Canal[] getInscricoes(){//Retorna o Array completo
+    public Canal[] getInscricoes(){//Remove
         return inscricoes;
     }
+
     public String inscricoesToString(){
         String nomeCanais = new String("");
         for(int i = 0; i < qtdInscrições; i++){
@@ -47,6 +37,7 @@ public class Usuario {
  
         return nomeCanais;
      }
+    
     public void CancelarInscrição(Canal canal){
         int i = 0;
         while(inscricoes[i] != canal){i++;}//Encontrei index do elemento que quero remover
@@ -55,38 +46,29 @@ public class Usuario {
         }
         qtdInscrições--;
     }
+    
     public void inscreverSe(Canal canal){
         inscricoes[qtdInscrições] = canal;
         qtdInscrições++;
     }
 
-    public Canal getInscricao(int i){//Retorna um elemento do Array com base no indice
+    public Canal getInscricao(int i){
         return inscricoes[i];
-        /*
-         *talvez seja bom criar uma variavel que armazena a quantidade de inscrições, caso o int i(parametro) seja maior que qtdInscrições
-         *a função nao retorna nada. Da forma atual é possovel passar qualquer numero inteiro, o que pode ocasionar em um Out of Index. 
-        */
     }
 
-    public void setInscricoes(Canal[] inscricoes){//Substitui todo o Array
+    public void setInscricoes(Canal[] inscricoes){//Remove
         this.inscricoes = inscricoes;
     }
 
-    public void setIncricao(int i, Canal c){//Subtitui somente um elemento do Array
+    public void setIncricao(int i, Canal c){//Remove
         inscricoes[i] = c;
     }
 
     public int getQtdInscricoes(){
         return qtdInscrições;
     }
-    public void setQtdInscricoes(int qtdInscrições){
+    public void setQtdInscricoes(int qtdInscrições){//Remove
         this.qtdInscrições = qtdInscrições;
 
     }
 }
-
-/* Os métodos setIscricao e setVideoHistorico podem ser utilizados para inserção de novos elementos nos respectivos Arrays.
- * Só tomar cuidado com a capasidade máxima.
- * Também é possível criar novas funcões de inserção. Atravez da classe ArrayUtils é possivel usar o metodo .add, que recebe
- * um Array e um novo elemento e faz tipo um .append() do Python.
-*/
