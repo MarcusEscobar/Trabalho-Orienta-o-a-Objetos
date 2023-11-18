@@ -4,7 +4,6 @@ public class Video extends Publicacao {
     private String titulo;
     private String descricaoVideo;
     private int qtdVisualizacoes;
-	private Canal autor;
 	private boolean isPausado = false;
 	private int velocidade = 1;
 	
@@ -40,14 +39,6 @@ public class Video extends Publicacao {
 	public void setQtdVisualizacoes(int qtdVisualizacoes){//Remove
 		this.qtdVisualizacoes = qtdVisualizacoes;
 	}
-
-	public Canal getAutor(){
-		return autor;
-	}
-
-	public void setAutor(Canal autor) {//Remove
-		this.autor = autor;
-	}
 	
 	public int getVelocidade() {
 		return velocidade;
@@ -71,8 +62,7 @@ public class Video extends Publicacao {
 		else{textoVideo+="O video está passando\n";}
 		textoVideo +="Quantidade de visualizações: "+qtdVisualizacoes+"\n";
 		textoVideo +="Velocidade atual: "+velocidade+"x\n";
-		textoVideo += "Quantidade Gostei: "+qtdGostei+"\n";
-		textoVideo += "Quantidade Não Gostei: "+qtdNaoGostei+"\n";
+		textoVideo += gosteiNaoGostei();
 		textoVideo += "Descição: "+descricaoVideo+"\n";
 		return textoVideo;
 	
@@ -81,4 +71,5 @@ public class Video extends Publicacao {
 	public void addViws(){
 		qtdVisualizacoes++;
 	}
+
 }

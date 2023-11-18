@@ -1,15 +1,15 @@
 package youtube;
 
+
 public abstract class Publicacao {
-    protected int qtdGostei;
+	protected int qtdGostei;
     protected int qtdNaoGostei;
 	protected boolean statusGostei = false;
 	protected boolean statusNãoGostei = false;
 	protected Comentario[] comentarios = new Comentario[50];
 	protected int qtdComentarios;
-    /*
-     * Não possui mais o atributo Autor
-    */
+    protected Canal autor;
+
 
 	public int getQtdComentarios() {
 		return qtdComentarios;
@@ -77,6 +77,41 @@ public abstract class Publicacao {
 			statusNãoGostei = true;
 			qtdGostei--;
 			qtdNaoGostei++;
+		}
+	}
+
+	public Canal getAutor() {
+		return autor;
+	}
+
+
+	public void setAutor(Canal autor) {
+		this.autor = autor;
+	}
+
+	public String stringComentarios(){//Swapar em 2 methods
+		String stringComentarios = new String("");
+		if(qtdComentarios == 0){stringComentarios+="Não possui comentários";}
+		for(int i = 1; i <= qtdComentarios;i++){
+			String s = String.valueOf(i);
+			stringComentarios += new String("  "+s+" - "+comentarios[i-1].comentarioToString()+"\n");
+		}
+		return stringComentarios;
+		}
+
+	public String gosteiNaoGostei(){
+		String text = "Quantidade Gostei: "+qtdGostei+"\n";
+		text += "Quantidade Não Gostei: "+qtdNaoGostei+"\n";
+		return text;
+	}
+
+	public boolean adicionarComentario(Comentario comentario){
+		if(qtdComentarios < 50){
+			comentarios[qtdComentarios] = comentario;
+			qtdComentarios++;
+			return true;
+		}else{
+			return false;
 		}
 	}
 

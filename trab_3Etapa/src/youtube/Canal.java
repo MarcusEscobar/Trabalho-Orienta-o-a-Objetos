@@ -109,7 +109,7 @@ public class Canal {
 		return null;
 	}
 
-	public boolean criarNovoVideo(Video video){
+	public boolean adicionarVideo(Video video){
 		if(qtdVideos < 50){
 			videos[qtdVideos]=video;
 			qtdVideos++;

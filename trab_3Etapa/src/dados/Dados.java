@@ -58,10 +58,18 @@ public class Dados {
         Comentario[] comentarios = new Comentario[50];
         for(int i = 0; i<qtdComentarios; i++){
             String s = String.valueOf(i+1);
-            comentarios[i]= new Comentario("Comentario ".concat(s), new Usuario("user ".concat(s),"user ".concat(s)));}
+            comentarios[i]= new Comentario("Comentario ".concat(s), new Usuario("user ".concat(s),"user ".concat(s)), false,true, null,v,null);}
         v.setComentarios(comentarios);
         v.setQtdComentarios(qtdComentarios);
 
+    }
+    public void preencherComentarios(Enquete e, int qtdComentarios){
+        Comentario[] comentarios = new Comentario[50];
+        for(int i = 0; i<qtdComentarios; i++){
+            String s = String.valueOf(i+1);
+            comentarios[i]= new Comentario("Comentario ".concat(s), new Usuario("user ".concat(s),"user ".concat(s)), false,false, null,null,e);}
+        e.setComentarios(comentarios);
+        e.setQtdComentarios(qtdComentarios);
     }
     
     public void preencherVideos(Canal c, int qtdVideos){
@@ -94,11 +102,11 @@ public class Dados {
         	
         	for(int j = 0; j < numOpcoes; j++) {
         		votosEmCada[j] = 0;
-        		opcoes[j] = "Opções " + String.valueOf(j+1);
-        		
+        		opcoes[j] = "Opções " + String.valueOf(j+1);	
         	}
         	enquetes[i] = new Enquete(pergunta, numOpcoes,votosEmCada , opcoes, c);
-                   }
+            //preencher comentários
+        }
         c.setEnqueteS(enquetes);
         c.setQtdEnquetes(qtdEnquetes);
         

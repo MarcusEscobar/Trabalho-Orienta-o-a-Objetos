@@ -7,7 +7,6 @@ public class Usuario {
     private int qtdInscrições = 0;
     
     public Usuario( String senha, String nomeUsuario){
-        //this.email = email;
         this.senha = senha;
         this.nomeUsuario = nomeUsuario;
     
