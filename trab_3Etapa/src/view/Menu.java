@@ -496,6 +496,56 @@ public abstract class Menu {
     }
    
 //ENQUETE
+    public static void criarEnquete(Canal canal) {
+    	 entrada.nextLine(); // limpando o buffer de entrada
+    	 System.out.println("Qual é a sua pergunta?\n");
+         String pergunta = entrada.nextLine();
+         System.out.println("Serão quantas respostas possiveis?\n");
+         int numRespostas = entrada.nextInt();
+         entrada.nextLine();
+         String [] resposta = new String[numRespostas];
+         int[] qtdVotosEmCada = new int[numRespostas];
+         for (int i = 0; i < numRespostas; i++) {
+        	 System.out.println("Digite uma resposta: /n");
+        	 resposta[i] = entrada.nextLine();
+        	 qtdVotosEmCada[i] = 0; 	 
+		}
+         Enquete createdEnquete = new Enquete(pergunta, numRespostas, qtdVotosEmCada, resposta, canal);
+        
+        if( canal.adicionarEnquete(createdEnquete)) {
+        	System.out.println("Enquete Criado com Sucesso");
+        	menuDeEnquetes(canal);
+        }
+         else {
+			System.out.println("Não foi Possivel criar a Enquete");
+			menuDeEnquetes(canal);
+		}
+     }
+
+    public static void listarEnquetes(Canal canal){
+        String opçoes = new String("Escolha um opção\n\n");
+        opçoes +="  0 - voltar ao canal\n\n";
+        opçoes+="Enquetes de "+canal.getNomeCanal()+"\n\n";       
+        for(int i = 1; i<= canal.getQtdEnquetes(); i++){
+            String s = String.valueOf(i);//Transformo j em string
+            opçoes += new String("  "+s+" - "+canal.getEnquete(i-1).getPergunta()+"\n");
+        }System.out.println(opçoes);
+        int valor = entrada.nextInt();
+        if(valor == 0){
+            clear();
+            menuCanal(canal);
+        }else if(valor >= 1 && valor <= canal.getQtdEnquetes()){
+            clear();
+            //Menu8Acessar/ler enquente
+
+        }else{
+            clear();
+            System.out.println("Opção inválida");
+            listarEnquetes(canal);
+        }
+
+    } 
+
     public static void menuDeEnquetes(Canal canal){
         String opçoes = new String("Escolha um opção\n\n");
         opçoes += "0 - voltar ao canal\n";//menuCanal
@@ -525,55 +575,9 @@ public abstract class Menu {
         }   	
     }          
                 
-    public static void criarEnquete(Canal canal) {
-    	 entrada.nextLine(); // limpando o buffer de entrada
-    	 System.out.println("Qual é a sua pergunta?\n");
-         String pergunta = entrada.nextLine();
-         System.out.println("Serão quantas respostas possiveis?\n");
-         int numRespostas = entrada.nextInt();
-         entrada.nextLine();
-         String [] resposta = new String[numRespostas];
-         int[] qtdVotosEmCada = new int[numRespostas];
-         for (int i = 0; i < numRespostas; i++) {
-        	 System.out.println("Digite uma resposta: /n");
-        	 resposta[i] = entrada.nextLine();
-        	 qtdVotosEmCada[i] = 0; 	 
-		}
-         Enquete createdEnquete = new Enquete(pergunta, numRespostas, qtdVotosEmCada, resposta, canal);
-        
-        if( canal.adicionarEnquete(createdEnquete)) {
-        	System.out.println("Enquete Criado com Sucesso");
-        	menuDeEnquetes(canal);
-        }
-         else {
-			System.out.println("Não foi Possivel criar a Enquete");
-			menuDeEnquetes(canal);
-		}
-     }
+    
          
-    public static void listarEnquetes(Canal canal){
-        String opçoes = new String("Escolha um opção\n\n");
-        opçoes +="  0 - voltar ao canal\n\n";
-        opçoes+="Enquetes de "+canal.getNomeCanal()+"\n\n";       
-        for(int i = 1; i<= canal.getQtdEnquetes(); i++){
-            String s = String.valueOf(i);//Transformo j em string
-            opçoes += new String("  "+s+" - "+canal.getEnquete(i-1).getPergunta()+"\n");
-        }System.out.println(opçoes);
-        int valor = entrada.nextInt();
-        if(valor == 0){
-            clear();
-            menuCanal(canal);
-        }else if(valor >= 1 && valor <= canal.getQtdEnquetes()){
-            clear();
-            //Menu8Acessar/ler enquente
-
-        }else{
-            clear();
-            System.out.println("Opção inválida");
-            listarEnquetes(canal);
-        }
-
-    }
+    
     
 //COMENTÁRIO(
     public static void criarComentario(Video video){
