@@ -101,7 +101,7 @@ public class Dados {
         	String pergunta = "Pergunta "+ String.valueOf(i +1);
         	
         	for(int j = 0; j < numOpcoes; j++) {
-        		votosEmCada[j] = 0;
+        		votosEmCada[j] = random.nextInt(10, 100);
         		opcoes[j] = "Opções " + String.valueOf(j+1);	
         	}
         	enquetes[i] = new Enquete(pergunta, numOpcoes,votosEmCada , opcoes, c);

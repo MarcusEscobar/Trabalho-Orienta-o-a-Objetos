@@ -536,8 +536,7 @@ public abstract class Menu {
             menuCanal(canal);
         }else if(valor >= 1 && valor <= canal.getQtdEnquetes()){
             clear();
-            //Menu8Acessar/ler enquente
-
+            acessarEnquete(canal.getEnquete(valor-1));
         }else{
             clear();
             System.out.println("Opção inválida");
@@ -574,7 +573,89 @@ public abstract class Menu {
                 break;
         }   	
     }          
-                
+          
+    public static void acessarEnquete(Enquete enquete){
+        //Enquete ToString
+        System.out.println(enquete.enqueteToString());
+        String opcoes = new String("Escolha uma opção \n\n");
+        opcoes += "  0 - voltar canal\n";
+        opcoes += "  1 - voltar página principal\n";
+        if(!enquete.getStatusGostei() && !enquete.getStatusNãoGostei()){
+            opcoes += "  2 - Gostei\n"; //GOSTEI = TRUE // NAO GOSTEI = FALSE
+            opcoes += "  3 - Não gostei\n";//GOSTEI = FALSE // NAO GOSTEI = TRUE
+        }else if(enquete.getStatusGostei() == true && enquete.getStatusNãoGostei() == false){
+            opcoes += "  3 - Não gostei\n";
+        }else{
+            opcoes += "  2 - Gostei\n";}
+        opcoes += "  4 - Comentar\n";
+        opcoes += "  5 - Listar comentários\n";
+        opcoes += "  6 - votar\n";
+        opcoes += "  7 - Editar enquete\n";
+        opcoes += "  8 - Excluir enquete\n";
+        System.out.println(opcoes);
+        int valor = entrada.nextInt();
+        switch (valor) {
+            case 0:
+                clear();
+                menuCanal(enquete.getAutor());
+                break;
+            case 1:
+                clear();
+                homePage();
+                break;
+            case 2:
+                enquete.adicionarGostei();
+                clear();
+                acessarEnquete(enquete);
+                break;
+            case 3:
+                enquete.adicionarNaoGostei();
+                clear();
+                acessarEnquete(enquete);
+                break;
+            case 4:
+                clear();
+                criarComentario(enquete);
+                break;
+            case 5:
+                clear();
+                listarCometarios(enquete);
+                break;
+            case 6:
+                clear();
+                menuVotação(enquete);
+                break;
+            case 7:
+            //Editar
+                break;
+            case 8:
+            //Excluir
+                break;
+            
+            default:
+                clear();
+                System.out.println("Opção inválida\n");
+                acessarEnquete(enquete);
+                break;
+        }
+    }
+
+    public static void menuVotação(Enquete enquete){
+        System.out.println(enquete.enqueteToString()+"\n");
+        System.out.println("Escolha a opção que deseja votar\n");
+        int valor = entrada.nextInt();
+        if(valor <= enquete.getQtdOpcoes()){
+            enquete.votar(valor-1);
+            clear();
+            System.out.println("Voto computado\n");
+            acessarEnquete(enquete);
+        }else{
+            clear();
+            System.out.println("Opção inválida");
+            menuVotação(enquete);
+        }
+
+    }
     
          
     

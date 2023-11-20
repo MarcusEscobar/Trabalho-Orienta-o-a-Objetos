@@ -10,7 +10,7 @@ public class Enquete extends Publicacao {
 
 	public Enquete(String pergunta,int qtdOpcoes,int[]qtdVotosEmCada,String[] opcoes, Canal autor){//Sem autor, igual Video
         this.pergunta = pergunta;
-        opcoes = new String[10];//O número de opções é aletorio, gerando um número entre 2 até 10
+        this.opcoes = opcoes;//O número de opções é aletorio, gerando um número entre 2 até 10
         this.qtdOpcoes = qtdOpcoes;
         qtdVotos = 0;
         this.qtdVotosEmCada = qtdVotosEmCada;
@@ -63,11 +63,12 @@ public class Enquete extends Publicacao {
 
 
 	public String enqueteToString() {
-		String enqueteToText = new String("O canal " +autor+ "faz a seguinte pergunta: /n");
-		enqueteToText += pergunta + "/n";
+		String enqueteToText = new String("O canal " +autor.getNomeCanal()+ "faz a seguinte pergunta: \n");
+		enqueteToText += pergunta + "\n\n";
 		String opcoesTextString = "";
 		for (int i = 0; i < qtdOpcoes ; i++) {
-			opcoesTextString += opcoes[i] + " - Quantidade de votos: " + qtdVotosEmCada[i] + "/n";
+			String s = String.valueOf(i+1);
+			opcoesTextString += s+": "+opcoes[i] + " - Quantidade de votos: " + qtdVotosEmCada[i] + "\n";
 		}
 		enqueteToText += opcoesTextString;
 		
@@ -75,7 +76,7 @@ public class Enquete extends Publicacao {
 	}
 	
 	public void votar(int selecao) {
-		qtdVotosEmCada[selecao] += 1;
+		qtdVotosEmCada[selecao] ++;
 	}
 
 }
