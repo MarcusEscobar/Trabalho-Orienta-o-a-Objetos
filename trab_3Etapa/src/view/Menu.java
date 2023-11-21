@@ -516,10 +516,12 @@ public abstract class Menu {
         
         if( canal.adicionarEnquete(createdEnquete)) {
         	System.out.println("Enquete Criado com Sucesso");
+            clear();
         	menuDeEnquetes(canal);
         }
          else {
 			System.out.println("Não foi Possivel criar a Enquete");
+            clear();
 			menuDeEnquetes(canal);
 		}
      }
