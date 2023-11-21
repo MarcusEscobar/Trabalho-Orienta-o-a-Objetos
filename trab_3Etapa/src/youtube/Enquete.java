@@ -79,6 +79,13 @@ public class Enquete extends Publicacao {
 		qtdVotosEmCada[selecao] ++;
 	}
 
+	public void editarEnquete(String pergunta,int numRespostas, String[] resposta, int[] qtdVotosEmCada){
+		this.pergunta = pergunta;
+		qtdOpcoes = numRespostas;
+		opcoes = resposta;
+		this.qtdVotosEmCada = qtdVotosEmCada;
+
+	}
 }
 
 

@@ -417,12 +417,11 @@ public abstract class Menu {
     }
 
      public static void excluirVideo(Video video){
-        entrada.nextLine();
         Canal autor = video.getAutor();
         System.out.println("Deseja mesmo excluir esse video");
         String opcoes =new String("Escolha uma opção\n\n");
-        opcoes+="0 - sim";
-        opcoes+="1 - não";
+        opcoes+="0 - sim\n";
+        opcoes+="1 - não\n";
         System.out.println(opcoes);
 
         int delete = entrada.nextInt();
@@ -500,14 +499,17 @@ public abstract class Menu {
     	 entrada.nextLine(); // limpando o buffer de entrada
     	 System.out.println("Qual é a sua pergunta?\n");
          String pergunta = entrada.nextLine();
+         System.out.println(" ");
          System.out.println("Serão quantas respostas possiveis?\n");
          int numRespostas = entrada.nextInt();
+         System.out.println(" ");
          entrada.nextLine();
          String [] resposta = new String[numRespostas];
          int[] qtdVotosEmCada = new int[numRespostas];
          for (int i = 0; i < numRespostas; i++) {
-        	 System.out.println("Digite uma resposta: /n");
+        	 System.out.println("Digite uma resposta: \n");
         	 resposta[i] = entrada.nextLine();
+             System.out.println(" ");
         	 qtdVotosEmCada[i] = 0; 	 
 		}
          Enquete createdEnquete = new Enquete(pergunta, numRespostas, qtdVotosEmCada, resposta, canal);
@@ -626,10 +628,12 @@ public abstract class Menu {
                 menuVotação(enquete);
                 break;
             case 7:
-            //Editar
+                clear();
+                menuEditarEnquete(enquete);
                 break;
             case 8:
-            //Excluir
+                clear();
+                excluirEnquete(enquete);
                 break;
             
             default:
@@ -657,8 +661,53 @@ public abstract class Menu {
 
     }
     
+    public static void menuEditarEnquete(Enquete enquete){
+        entrada.nextLine();
+        System.out.println("Digite uma nova pergunta");
+        String pergunta = entrada.nextLine();
+        System.out.println(" ");
+        System.out.println("Serão quantas respostas possiveis?\n");
+        int numRespostas = entrada.nextInt();
+        System.out.println(" ");
+        entrada.nextLine();
+         String [] resposta = new String[numRespostas];
+         int[] qtdVotosEmCada = new int[numRespostas];
+         for (int i = 0; i < numRespostas; i++) {
+        	 System.out.println("Digite uma resposta: \n");
+        	 resposta[i] = entrada.nextLine();
+             System.out.println(" ");
+        	 qtdVotosEmCada[i] = 0; 	 
+		}
+        enquete.editarEnquete(pergunta, numRespostas, resposta, qtdVotosEmCada);
+        clear();
+        System.out.println("Enquete editada com sucesso\n");
+        acessarEnquete(enquete);
+    }
          
-    
+    public static void excluirEnquete(Enquete enquete){
+        Canal autor = enquete.getAutor();
+        System.out.println("Deseja mesmo excluir essa enquete");
+        String opcoes =new String("Escolha uma opção\n\n");
+        opcoes+="0 - sim\n";
+        opcoes+="1 - não\n";
+        System.out.println(opcoes);
+
+        int delete = entrada.nextInt();
+        switch (delete) {
+            case 0:
+                enquete.getAutor().deletarEnquete(enquete);
+                clear();
+                System.out.println("Enquete excluida com sucesso");
+                menuCanal(autor);          
+                break;
+            default:
+                clear();
+                if(delete == 1){System.out.println("Enquete não foi excluida");}
+                else{System.out.println("Opção inválida");}
+                acessarEnquete(enquete);
+                break;
+        }
+    }
     
 //COMENTÁRIO(
     public static void criarComentario(Video video){

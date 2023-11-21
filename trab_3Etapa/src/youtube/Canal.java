@@ -130,6 +130,16 @@ public class Canal {
 
 	}
 
+	public void deletarEnquete(Enquete enquete){
+		int i = 0;
+		while (enquetes[i]!=enquete){i++;}
+		for(;i<qtdEnquetes;i++){
+			enquetes[i] = enquetes[i+1];
+		}
+		qtdEnquetes--;
+
+	}
+
 	public String canalToString(){
 		String textoCanal = new String("Este é o canal: "+nomeCanal+"\n");
 		textoCanal+="Proprietario: "+proprietario.getNomeUsuario()+"\n";
