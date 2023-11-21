@@ -10,6 +10,7 @@ public class Main {
     public static void main(String[] args){
         Scanner entrada = new Scanner(System.in);
         dados.preencherCanais();
+        
         Menu.iniciar(dados, entrada);
         
 }

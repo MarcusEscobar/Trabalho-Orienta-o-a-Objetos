@@ -4,8 +4,8 @@ package youtube;
 public class Comentario extends Publicacao {
     private String texto;
     private Usuario autor;
-    private boolean inComentario;
-    private boolean inVideo;
+    private boolean noComentario;
+    private boolean noVideo;
     private Comentario comentarioPai;
     private Video videoPai;
     private Enquete enquetePai;
@@ -16,21 +16,20 @@ public class Comentario extends Publicacao {
         autor = a;
         qtdGostei = 0;
         qtdNaoGostei = 0;
-        this.inComentario = isResposta;
-        this.inVideo = inVideo;
+        this.noComentario = isResposta;
+        this.noVideo = inVideo;
         comentarioPai = cp;
         videoPai = vp;
         enquetePai = ep;
         
     }
-    
 
-    public boolean inComentario() {
-        return inComentario;
+    public boolean noComentario() {
+        return noComentario;
     }
 
-       public boolean inVideo() {
-        return inVideo;
+    public boolean noVideo() {
+        return noVideo;
     }
 
     public Comentario getComentarioPai() {
@@ -45,15 +44,8 @@ public class Comentario extends Publicacao {
         return enquetePai;
     }
 
-    public String getTexto(){
-        return texto;
-    }
 
-    public void setTexto(String texto){
-        this.texto = texto;
-    }
-
-    public String comentarioToString(){
+    public String toString(){
         return autor.getNomeUsuario()+": "+texto;
     }
 

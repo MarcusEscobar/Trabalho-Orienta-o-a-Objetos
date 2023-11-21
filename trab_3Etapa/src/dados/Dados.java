@@ -107,7 +107,7 @@ public class Dados {
         	enquetes[i] = new Enquete(pergunta, numOpcoes,votosEmCada , opcoes, c);
             //preencher comentários
         }
-        c.setEnqueteS(enquetes);
+        c.setEnquetes(enquetes);
         c.setQtdEnquetes(qtdEnquetes);
         
     }

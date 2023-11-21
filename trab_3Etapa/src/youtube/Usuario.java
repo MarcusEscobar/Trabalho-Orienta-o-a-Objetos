@@ -11,21 +11,11 @@ public class Usuario {
         this.nomeUsuario = nomeUsuario;
     
     }
-    public String getSenha(){//Remove
+    public String getSenha(){
         return senha;
-    }
-    public void setSenha(String senha){//Remove
-        this.senha = senha;
     }
     public String getNomeUsuario(){
         return nomeUsuario;
-    }
-    public void setNomeUsuario(String nomeUsuario){//Remove
-        this.nomeUsuario = nomeUsuario;
-    }
-
-    public Canal[] getInscricoes(){//Remove
-        return inscricoes;
     }
 
     public String inscricoesToString(){
@@ -55,19 +45,8 @@ public class Usuario {
         return inscricoes[i];
     }
 
-    public void setInscricoes(Canal[] inscricoes){//Remove
-        this.inscricoes = inscricoes;
-    }
-
-    public void setIncricao(int i, Canal c){//Remove
-        inscricoes[i] = c;
-    }
-
     public int getQtdInscricoes(){
         return qtdInscrições;
     }
-    public void setQtdInscricoes(int qtdInscrições){//Remove
-        this.qtdInscrições = qtdInscrições;
 
-    }
 }

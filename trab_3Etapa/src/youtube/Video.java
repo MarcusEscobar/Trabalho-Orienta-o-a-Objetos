@@ -4,13 +4,12 @@ public class Video extends Publicacao {
     private String titulo;
     private String descricaoVideo;
     private int qtdVisualizacoes;
-	private boolean isPausado = false;
+	private boolean estaPausado = false;
 	private int velocidade = 1;
 	
 	public Video(String titulo, String descricao, Canal c, int views){
         this.titulo = titulo;
         descricaoVideo = descricao;
-       	//this.duracaoVideo = duracaoVideo;
         qtdGostei = 0;
         qtdNaoGostei = 0;
         qtdVisualizacoes = views;
@@ -25,21 +24,10 @@ public class Video extends Publicacao {
 		this.titulo = titulo;
 	}
 
-	public String getDescricaoVideo() {//Remove
-		return descricaoVideo;
-	}
-
 	public void setDescricaoVideo(String descricaoVideo) {
 		this.descricaoVideo = descricaoVideo;
 	}
-	public int getQtdVisualizacoes() {//Remove
-		return qtdVisualizacoes;
-	}
 
-	public void setQtdVisualizacoes(int qtdVisualizacoes){//Remove
-		this.qtdVisualizacoes = qtdVisualizacoes;
-	}
-	
 	public int getVelocidade() {
 		return velocidade;
 	}
@@ -49,16 +37,16 @@ public class Video extends Publicacao {
 	}
 
 	public boolean getIsPausado() {
-		return isPausado;
+		return estaPausado;
 	}
 
 	public void setIsPausado(boolean isPausado) {
-		this.isPausado = isPausado;
+		this.estaPausado = isPausado;
 	}
 
-    public String videoToString(){
-		String textoVideo = new String("Este é o video: "+titulo+" do canal "+autor.getNomeCanal()+"\n");
-		if(isPausado){textoVideo+="O video está pausado\n";}
+    public String toString(){
+		String textoVideo = new String("Este é o video: "+titulo+", do canal "+autor.getNomeCanal()+"\n");
+		if(estaPausado){textoVideo+="O video está pausado\n";}
 		else{textoVideo+="O video está passando\n";}
 		textoVideo +="Quantidade de visualizações: "+qtdVisualizacoes+"\n";
 		textoVideo +="Velocidade atual: "+velocidade+"x\n";

@@ -20,30 +20,17 @@ public abstract class Publicacao {
 	public boolean getStatusGostei() {
 		return statusGostei;
 	}
-	public void setStatusGostei(boolean status) {
-		statusGostei = status;
-	}
 	public boolean getStatusNãoGostei() {
 		return statusNãoGostei;
-	}
-	public void setStatusNãoGostei(boolean status) {
-		statusNãoGostei = status;
-	}
-    public int getQtdGostei() {
-		return qtdGostei;
 	}
 	public void setQtdGostei(int Gostei) {
 		qtdGostei = Gostei;
 	}
-	public int getQtdNaoGostei() {
-		return qtdNaoGostei;
-	}
+
 	public void setQtdNaoGostei(int NaoGostei) {
 		qtdNaoGostei = NaoGostei;
 	}
-	public Comentario[] getComentarios() {
-		return comentarios;
-	}
+
 	public void setComentarios(Comentario[] comentarios) {
 		this.comentarios = comentarios;
 	}
@@ -51,10 +38,6 @@ public abstract class Publicacao {
 		return comentarios[i];
 
 	}
-	public void setComentario(int i, Comentario c){
-		comentarios[i]=c;
-	}
-
 	public void adicionarGostei(){
 		if(!statusGostei && !statusNãoGostei){
 			statusGostei = true;
@@ -83,18 +66,12 @@ public abstract class Publicacao {
 	public Canal getAutor() {
 		return autor;
 	}
-
-
-	public void setAutor(Canal autor) {
-		this.autor = autor;
-	}
-
-	public String stringComentarios(){//Swapar em 2 methods
+	public String stringComentarios(){
 		String stringComentarios = new String("");
 		if(qtdComentarios == 0){stringComentarios+="Não possui comentários";}
 		for(int i = 1; i <= qtdComentarios;i++){
 			String s = String.valueOf(i);
-			stringComentarios += new String("  "+s+" - "+comentarios[i-1].comentarioToString()+"\n");
+			stringComentarios += new String("  "+s+" - "+comentarios[i-1].toString()+"\n");
 		}
 		return stringComentarios;
 		}
