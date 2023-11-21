@@ -515,7 +515,7 @@ public abstract class Menu {
          Enquete createdEnquete = new Enquete(pergunta, numRespostas, qtdVotosEmCada, resposta, canal);
         
         if( canal.adicionarEnquete(createdEnquete)) {
-        	System.out.println("Enquete Criado com Sucesso");
+        	System.out.println("Enquete Criado com Sucesso\n");
             clear();
         	menuDeEnquetes(canal);
         }
