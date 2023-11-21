@@ -770,7 +770,7 @@ public abstract class Menu {
         int valor = entrada.nextInt();
         if(valor == 0){
             clear();
-            //Menu8
+            acessarEnquete(enquete);
         }else if(valor >= 1 && valor <= enquete.getQtdComentarios()){
             clear();
             acessarComentario(enquete.getComentario(valor-1));
