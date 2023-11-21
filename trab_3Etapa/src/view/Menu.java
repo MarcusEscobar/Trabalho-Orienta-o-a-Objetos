@@ -462,7 +462,7 @@ public abstract class Menu {
 
     public static void menuDeVideos(Canal canal){
         String opçoes = new String("Escolha um opção\n\n");
-        opçoes += "  0 - voltar ao canal\n";//menu4
+        opçoes += "  0 - Voltar ao canal\n";//menu4
         opçoes += "  1 - Criar video\n";
         opçoes += "  2 - Listar todos os vídeos\n";//Menu5video
         opçoes += "  3 - Buscar video pelo título\n";
@@ -549,9 +549,9 @@ public abstract class Menu {
 
     public static void menuDeEnquetes(Canal canal){
         String opçoes = new String("Escolha um opção\n\n");
-        opçoes += "  0 - voltar ao canal\n";//menuDeCanal
+        opçoes += "  0 - Voltar ao canal\n";//menuDeCanal
         opçoes += "  1 - Criar Enquete\n";
-        opçoes += "  2 - listar todas as Enquetes\n";//MenulistarEnquetes
+        opçoes += "  2 - Listar todas as Enquetes\n";//MenulistarEnquetes
         System.out.println(opçoes);
         int valor = entrada.nextInt();
         switch (valor) {
