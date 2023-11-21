@@ -13,29 +13,16 @@ public class Dados {
     public Usuario getUsuario(){
         return user;
     }
-
     public void setUsuario(Usuario user){
         this.user = user;
-    }
-
-    public Canal[] getCanais(){//Remove
-        return canais;
     }
     public Canal getCanal(int i){
         return canais[i];
     }
-    public void setCanais(Canal[] canais){//Remove
-        this.canais = canais;
-    }
-    public void setCanal(int i,Canal c){//Remove
-        canais[i] = c;
-    }
     public  int getQtdCanais(){
         return qtdCanais;
     }
-    public  void setQtdCanais(int qtdCanais){//Remove
-        this.qtdCanais = qtdCanais;
-    }
+
 
     public String gerarNomeAleatorio(int tamanho) {
         String alfabeto = "abcdefghijklmnoprstuv"; 
