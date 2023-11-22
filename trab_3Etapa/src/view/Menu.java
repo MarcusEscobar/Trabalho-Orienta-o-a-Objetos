@@ -823,6 +823,7 @@ public abstract class Menu {
                     clear();
                     acessarVideo(comentario.getVideoPai());
                 }else{
+                    clear();
                     acessarEnquete(comentario.getEnquetePai());
                 }
                 break;
